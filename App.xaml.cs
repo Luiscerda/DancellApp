@@ -1,4 +1,6 @@
-﻿using DancellApp.Views;
+﻿using DancellApp.Services;
+using DancellApp.ViewModels;
+using DancellApp.Views;
 
 namespace DancellApp;
 
@@ -11,7 +13,7 @@ public partial class App : Application
     public App()
 	{
 		InitializeComponent();
+        MainPage = new Login();
 
-		MainPage = new	Login();
-	}
+    }
 }

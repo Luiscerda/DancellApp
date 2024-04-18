@@ -17,5 +17,9 @@ namespace DancellApp.Models
         {
             connection.Dispose();
         }
+        public List<Usuario> GetUsuarios()
+        {
+            return this.connection.Table<Usuario>().ToList();
+        }
     }
 }

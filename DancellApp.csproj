@@ -49,10 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
 	  <PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
 	</ItemGroup>
 
@@ -78,6 +75,14 @@
 	  <MauiXaml Update="Views\MenuPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.20" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.20" />
 	</ItemGroup>
 
 </Project>

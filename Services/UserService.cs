@@ -1,31 +1,15 @@
 ﻿using DancellApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DancellApp.Services
 {
-    public class UserService : BaseService
+    public class UserService
     {
-        public UserService(DbContext dbContext) : base(dbContext)
+        public Usuario First()
         {
-
-        }
-
-        public async Task<Usuario> GetUsuarioActAsync()
-        {
-            try
+            using (var da = new DataAcces())
             {
-                return await dbContext.Database.Table<Usuario>().Where(x => x.Activo == true).FirstOrDefaultAsync();
+                return da.GetUsuarios().FirstOrDefault();
             }
-            catch (Exception ex)
-            {
-                StatusMessage = $"No se pudieron recuperar los datos. {ex.Message}";
-            }
-
-            return null;
         }
     }
 }
