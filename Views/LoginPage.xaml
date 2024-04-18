@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DancellApp.Views.Login"
+             Title="Login"
+             BackgroundColor="#E1EAF9">
+    <VerticalStackLayout>
+        <ScrollView>
+            <Grid>
+                <StackLayout>
+                    <Image
+                        Source="dancell_asset"/>
+                    <Label
+                        Text="BIENVENIDO"
+                        Margin="0,30"
+                        FontSize="20"
+                        TextColor="#080808"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Text="Aplicacion para la gestion de procesos de la empresa Dancell LTDA."
+                        Padding="0,15"
+                        FontSize="12"
+                        TextColor="#898585"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"/>     
+                </StackLayout>
+                <StackLayout>
+                    
+                </StackLayout>
+            </Grid>
+            
+            
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>
