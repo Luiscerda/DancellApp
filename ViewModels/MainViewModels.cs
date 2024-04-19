@@ -14,6 +14,7 @@ namespace DancellApp.ViewModels
 
         #region ViewModels
         public LoginViewModels LoginView { get; set; }
+        public LoginScreenViewModels LoginScreenView { get; set; }
         #endregion
 
         #region Constructor

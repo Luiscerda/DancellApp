@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using DancellApp.Views;
+using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
 
 namespace DancellApp.ViewModels
@@ -8,7 +9,8 @@ namespace DancellApp.ViewModels
         #region Methods
         public async void NavComision()
         {
-            await App.Master.Detail.Navigation.PushAsync(new Views.LoginPage());
+            MainViewModels.GetInstance().LoginScreenView = new LoginScreenViewModels();
+            await App.Navigation.PushAsync(new LoginPage());
         }
         #endregion
 

@@ -4,9 +4,10 @@
              xmlns:controls="clr-namespace:DancellApp.Controls"
              x:Class="DancellApp.Views.LoginPage"        
              Title="LoginPage"
+             BindingContext="{Binding MainView, Source={StaticResource Locator}}"
              BackgroundColor="White">
     <ContentPage.Content>
-        <VerticalStackLayout VerticalOptions="FillAndExpand">
+        <VerticalStackLayout VerticalOptions="FillAndExpand" BindingContext="{Binding LoginScreenView}">
             <ScrollView VerticalScrollBarVisibility="Default">
                 <StackLayout Padding="5">
                     <Image
