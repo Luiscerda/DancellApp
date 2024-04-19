@@ -7,23 +7,21 @@ namespace DancellApp.ViewModels
 {
     public partial class LoginViewModels : BaseViewModels
     {
+        #region Properties
+        public ICommand NewCommand { get; }
+        #endregion
+
         #region Constructor
         public LoginViewModels()
         {
-
+            NewCommand = new AsyncRelayCommand(NewNoteAsync);
         }
         #endregion
 
         #region Methods
-
-        #endregion
-
-        #region Commands
-        [RelayCommand]
-        public void NavLoginScreen()
+        private async Task NewNoteAsync()
         {
-            MainViewModels.GetInstance().LoginScreenView = new LoginScreenViewModels();
-            App.Navigation.PushAsync(new LoginScreenPage());
+            await Shell.Current.GoToAsync(nameof(Views.LoginScreenPage));
         }
         #endregion
     }
