@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DancellApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace DancellApp.ViewModels
 {
-    public class LoginScreenViewModels
+    public partial class LoginScreenViewModels : BaseViewModels
     {
+        #region Constructor
+        public LoginScreenViewModels()
+        {
+
+        }
+        #endregion
     }
 }

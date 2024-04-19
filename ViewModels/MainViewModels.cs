@@ -21,7 +21,6 @@ namespace DancellApp.ViewModels
         public MainViewModels()
         {
             instance = this;
-            this.LoginView = new LoginViewModels();
         }
         #endregion
 

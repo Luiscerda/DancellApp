@@ -1,8 +1,10 @@
+using DancellApp.ViewModels;
+
 namespace DancellApp.Views;
 
-public partial class LoginPage : ContentPage
+public partial class LoginScreenPage : ContentPage
 {
-	public LoginPage()
+	public LoginScreenPage()
 	{
 		InitializeComponent();
 	}

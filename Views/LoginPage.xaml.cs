@@ -1,9 +1,12 @@
+using DancellApp.ViewModels;
+
 namespace DancellApp.Views;
 
-public partial class Login : ContentPage
+public partial class LoginPage : ContentPage
 {
-	public Login()
+	public LoginPage()
 	{
 		InitializeComponent();
+		this.BindingContext = new LoginViewModels();
 	}
 }

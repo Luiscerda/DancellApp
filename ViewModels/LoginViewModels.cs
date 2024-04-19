@@ -1,26 +1,29 @@
-﻿using DancellApp.Views;
-using GalaSoft.MvvmLight.Command;
+﻿using CommunityToolkit.Mvvm.Input;
+using DancellApp.Services;
+using DancellApp.Views;
 using System.Windows.Input;
 
 namespace DancellApp.ViewModels
 {
-    public class LoginViewModels
+    public partial class LoginViewModels : BaseViewModels
     {
-        #region Methods
-        public async void NavComision()
+        #region Constructor
+        public LoginViewModels()
         {
-            MainViewModels.GetInstance().LoginScreenView = new LoginScreenViewModels();
-            await App.Navigation.PushAsync(new LoginPage());
+
         }
         #endregion
 
+        #region Methods
+
+        #endregion
+
         #region Commands
-        public ICommand NavComisionCommand
+        [RelayCommand]
+        public void NavLoginScreen()
         {
-            get
-            {
-                return new RelayCommand(NavComision);
-            }
+            MainViewModels.GetInstance().LoginScreenView = new LoginScreenViewModels();
+            App.Navigation.PushAsync(new LoginScreenPage());
         }
         #endregion
     }
