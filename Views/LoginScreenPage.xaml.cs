@@ -7,5 +7,6 @@ public partial class LoginScreenPage : ContentPage
 	public LoginScreenPage()
 	{
 		InitializeComponent();
-	}
+        BindingContext = App.Current.Services.GetService<LoginScreenViewModels>();
+    }
 }

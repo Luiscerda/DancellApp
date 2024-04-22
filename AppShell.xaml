@@ -5,15 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DancellApp"
     xmlns:views="clr-namespace:DancellApp.Views"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    Shell.BackgroundColor="#EE2323">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage" />
-
-    <ShellContent Route="loginScreen"
-                  Style="{StaticResource }"
-                  ContentTemplate="{DataTemplate views:LoginScreenPage}" />
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
 
 </Shell>

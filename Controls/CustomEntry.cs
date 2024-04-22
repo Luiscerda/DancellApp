@@ -1,12 +1,12 @@
 ﻿namespace DancellApp.Controls
 {
-    public sealed class StandardEntry : Entry
+    public sealed class CustomEntry : Entry
     {
-        public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(StandardEntry), 0);
-        public static BindableProperty BorderThicknessProperty = BindableProperty.Create(nameof(BorderThickness), typeof(int), typeof(StandardEntry), 0);
-        public static BindableProperty PaddingProperty = BindableProperty.Create(nameof(Padding), typeof(Thickness), typeof(StandardEntry), new Thickness(5));
-        public static BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(StandardEntry), Colors.Transparent);
-        public static BindableProperty CustomHeightProperty = BindableProperty.Create(nameof(CustomHeight), typeof(int), typeof(StandardEntry), 0);
+        public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(CustomEntry), 0);
+        public static BindableProperty BorderThicknessProperty = BindableProperty.Create(nameof(BorderThickness), typeof(int), typeof(CustomEntry), 0);
+        public static BindableProperty PaddingProperty = BindableProperty.Create(nameof(Padding), typeof(Thickness), typeof(CustomEntry), new Thickness(5));
+        public static BindableProperty BorderColorProperty = BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(CustomEntry), Colors.Transparent);
+        public static BindableProperty CustomHeightProperty = BindableProperty.Create(nameof(CustomHeight), typeof(int), typeof(CustomEntry), 0);
         public int CornerRadius
         {
             get => (int)GetValue(CornerRadiusProperty);

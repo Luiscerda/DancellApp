@@ -21,7 +21,7 @@ namespace DancellApp.ViewModels
         #region Methods
         private async Task NewNoteAsync()
         {
-            await Shell.Current.GoToAsync(nameof(Views.LoginScreenPage));
+            await Shell.Current.Navigation.PushAsync(new LoginScreenPage(), false);
         }
         #endregion
     }

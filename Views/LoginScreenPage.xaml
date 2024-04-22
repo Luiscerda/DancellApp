@@ -1,113 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DancellApp.Views.LoginScreenPage"    
+             xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
              xmlns:controls="clr-namespace:DancellApp.Controls"
-             x:Class="DancellApp.Views.LoginScreenPage"        
-             Title="LoginPage"
-             BackgroundColor="White">
-    <ContentPage.Content>
-        <VerticalStackLayout VerticalOptions="FillAndExpand">
-            <ScrollView VerticalScrollBarVisibility="Default">
-                <StackLayout Padding="5">
+             BackgroundColor="White"
+             x:DataType="viewModels:LoginScreenViewModels">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0">
                     <Image
-                        Source="logo_dancell.png"
-                    />
-                    <Grid VerticalOptions="CenterAndExpand" RowSpacing="15">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <controls:StandardEntry
-                            BorderColor="#EE2323"
-                            BorderThickness="1"
-                            CornerRadius="5"
-                            FontSize="20"
-                            Grid.Row="0"
-                            HeightRequest="55"
-                            Placeholder="Usuario"
-                            PlaceholderColor="#EE2323"
-                            TextColor="Red"
-                            WidthRequest="320"
-                         />
-                        <controls:StandardEntry
-                            BorderColor="#EE2323"
-                            BorderThickness="1"
-                            CornerRadius="5"
-                            FontSize="20"
-                            Grid.Row="1"
-                            HeightRequest="55"
-                            IsPassword="True"
-                            Placeholder="Contraseña"
-                            PlaceholderColor="#EE2323"
-                            TextColor="Red"
-                            WidthRequest="320"
-                        />
-                        <ImageButton
-                            BackgroundColor="Transparent"
-                            Grid.Row="1"
-                            HorizontalOptions="EndAndExpand"
-                            Margin="35,10"
-                            Source="invisible.png"                           
-                        />
-                        <Label
-                            FontSize="20"
-                            Grid.Row="2"
-                            HorizontalOptions="StartAndExpand"
-                            Margin="30,0,0,0"
-                            Text="Recordarme?"
-                            TextColor="Red"
-                            VerticalOptions="Center"
-                        />
-                        <Switch
-                            Grid.Row="2"
-                            HorizontalOptions="End"
-                            IsToggled="True"
-                            Margin="0,0,32,0"
-                            OnColor ="Blue"
-                            ThumbColor="Blue"
-                         />
-                        <Label
-                            FontSize="18"
-                            Grid.Row="3"
-                            Margin="30,0,0,0"
-                            Text="Olvidaste tu contraseña?"    
-                            TextColor="Blue"
-                            VerticalOptions="CenterAndExpand"
-                        />
-                        <HorizontalStackLayout Grid.Row="4" Spacing="5" Margin="30,0">
-                            <Button
-                                BackgroundColor="#EE2323"
-                                HeightRequest="60"
-                                Text="INICIAR SESION"
-                                TextColor="White"
-                                WidthRequest="160"/>
-                            <Button
-                                BackgroundColor="Blue"
-                                HeightRequest="60"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="REGISTRARSE"
-                                TextColor="White"
-                                WidthRequest="150"/>
-                        </HorizontalStackLayout>
-                        <VerticalStackLayout Grid.Row="5">
-                            <Image
-                                Source="logo_claro.png"
-                                HorizontalOptions="CenterAndExpand"
-                                VerticalOptions="End"
-                                HeightRequest="40"
-                                WidthRequest="50"
-                            />
-                        </VerticalStackLayout>
-                    </Grid>
+                        Source="dancell_asset"
+                        Aspect="Fill"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Margin="20">
+                    <controls:CustomEntry
+                        Placeholder="Usuario"
+                        BorderColor="#D4D7DB"
+                        BorderThickness="2"
+                        WidthRequest="380"
+                        HeightRequest="55"
+                        CornerRadius="10"
+                        TextColor="#647B9D"/>
+
 
                 </StackLayout>
-            </ScrollView>
+                <StackLayout Grid.Row="2" Margin="0,20" Orientation="Horizontal" Spacing="0">
+                    <Entry
+                        Text="Maui"
+                        TextColor="#EE2323"
+                        Placeholder="USUARIO"
+                        HorizontalOptions="FillAndExpand"/> 
+                    <Image
+                        Source="eye_on"
+                        Margin="2"
+                        AbsoluteLayout.LayoutBounds="1, .5, 25, 100"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        HeightRequest="30"/>
+
+                </StackLayout>
+            </Grid>
         </VerticalStackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 
 </ContentPage>

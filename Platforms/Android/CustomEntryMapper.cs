@@ -5,16 +5,16 @@ using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
 
-namespace DancellApp.Platforms.Android
+namespace DancellApp.Platforms
 {
-    public static class StandardEntryRenderer
+    public static class CustomEntryMapper
     {
         public static void Map(IElementHandler handler, IElement view)
         {
-            if (view is StandardEntry)
+            if (view is CustomEntry)
             {
                 var casted = (EntryHandler)handler;
-                var viewData = (StandardEntry)view;
+                var viewData = (CustomEntry)view;
 
                 var gd = new GradientDrawable();
 
