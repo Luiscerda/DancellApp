@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:DancellApp.Controls"
              BackgroundColor="#E1EAF9"
              Shell.BackgroundColor="#E1EAF9">
-    <ScrollView>
+    <ScrollView VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always">
         <VerticalStackLayout>
             <Grid VerticalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
@@ -25,15 +25,15 @@
                         Text="Registrate"
                         HorizontalTextAlignment="Center"/>
                     <Label
-                        FontSize="15"
+                        FontSize="14"
                         FontAttributes="Bold"
                         HorizontalTextAlignment="Center"
                         Padding="0, 15"
-                        Text="Crea tu cuenta llenado el formulario"
+                        Text="Crea tu cuenta llenando el formulario"
                         TextColor="#888C91"
                         TextTransform="None"/>
                 </StackLayout>
-                <StackLayout Grid.Row="1" Padding="0, 20" Spacing="10">
+                <StackLayout Grid.Row="1" Padding="0, 15" Spacing="10">
                     <controls:CustomEntry
                         Placeholder="Identificacion"
                         BorderColor="#D4D7D8"
@@ -43,7 +43,8 @@
                         HeightRequest="55"
                         CornerRadius="10"
                         TextColor="#74787E"
-                        PlaceholderColor="#647B9D"/>
+                        PlaceholderColor="#647B9D"
+                        Keyboard="Numeric"/>
                     <controls:CustomEntry
                         Placeholder="Nombres"
                         BorderColor="#D4D7D8"
@@ -53,7 +54,8 @@
                         HeightRequest="55"
                         CornerRadius="10"
                         TextColor="#74787E"
-                        PlaceholderColor="#647B9D"/>
+                        PlaceholderColor="#647B9D"
+                        TextTransform="Uppercase"/>
                     <controls:CustomEntry
                         Placeholder="Apellidos"
                         BorderColor="#D4D7D8"
@@ -63,7 +65,8 @@
                         HeightRequest="55"
                         CornerRadius="10"
                         TextColor="#74787E"
-                        PlaceholderColor="#647B9D"/>
+                        PlaceholderColor="#647B9D"
+                        TextTransform="Uppercase"/>
                     <controls:CustomEntry
                         Placeholder="Celular"
                         BorderColor="#D4D7D8"
@@ -73,7 +76,8 @@
                         HeightRequest="55"
                         CornerRadius="10"
                         TextColor="#74787E"
-                        PlaceholderColor="#647B9D"/>
+                        PlaceholderColor="#647B9D"
+                        Keyboard="Numeric"/>
                     <controls:CustomEntry
                         Placeholder="Correo"
                         BorderColor="#D4D7D8"
@@ -83,9 +87,10 @@
                         HeightRequest="55"
                         CornerRadius="10"
                         TextColor="#74787E"
-                        PlaceholderColor="#647B9D"/>
+                        PlaceholderColor="#647B9D"
+                        Keyboard="Email"/>
                 </StackLayout>
-                <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                <StackLayout Grid.Row="2" HorizontalOptions="Center" Margin="0,15">
                     <Button
                         Text="Registrarse"
                         BackgroundColor="#EE2323"
