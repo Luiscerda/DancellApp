@@ -40,7 +40,8 @@
                 </StackLayout>
                 <StackLayout Grid.Row="1" Margin="0,30" HorizontalOptions="Center">
                     <HorizontalStackLayout Spacing="5">
-                        <Button Text="INICIAR SESION" BackgroundColor="#EE2323" TextColor="White" CornerRadius="25" FontAttributes="Bold" WidthRequest="140" Command="{Binding NewCommand}">
+                        <Button Text="INICIAR SESION" BackgroundColor="#EE2323" TextColor="White" CornerRadius="25" 
+                                FontAttributes="Bold" WidthRequest="140" Command="{Binding NewCommand}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroupList>
                                     <VisualStateGroup x:Name="CommonStates">
@@ -58,7 +59,25 @@
                                 </VisualStateGroupList>
                             </VisualStateManager.VisualStateGroups>
                         </Button>
-                        <Button Text="REGISTRARSE" BackgroundColor="Transparent" TextColor="#53565A" BorderColor="#53565A" BorderWidth="2" CornerRadius="25" FontAttributes="Bold" WidthRequest="140"/>
+                        <Button Text="REGISTRARSE" BackgroundColor="Transparent" TextColor="#53565A" BorderColor="#53565A" 
+                                BorderWidth="2" CornerRadius="25" FontAttributes="Bold" WidthRequest="140" Command="{Binding NavSingUpCommand}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
                     </HorizontalStackLayout>
                 </StackLayout>
                 <StackLayout Grid.Row="2" Margin="0,40" HorizontalOptions="Center">

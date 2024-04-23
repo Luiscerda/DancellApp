@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DancellApp.Views.SingupPage"
+             xmlns:controls="clr-namespace:DancellApp.Controls"
+             BackgroundColor="#E1EAF9"
+             Shell.BackgroundColor="#E1EAF9">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Grid VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Margin="0,50" HorizontalOptions="CenterAndExpand">
+                    <Label
+                        FontSize="30"
+                        FontAttributes="Bold"
+                        TextColor="#53565A"
+                        Text="Registrate"
+                        HorizontalTextAlignment="Center"/>
+                    <Label
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        HorizontalTextAlignment="Center"
+                        Padding="0, 15"
+                        Text="Crea tu cuenta llenado el formulario"
+                        TextColor="#888C91"
+                        TextTransform="None"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Padding="0, 20" Spacing="10">
+                    <controls:CustomEntry
+                        Placeholder="Identificacion"
+                        BorderColor="#D4D7D8"
+                        BorderThickness="2"
+                        FontSize="15"
+                        WidthRequest="350"
+                        HeightRequest="55"
+                        CornerRadius="10"
+                        TextColor="#74787E"
+                        PlaceholderColor="#647B9D"/>
+                    <controls:CustomEntry
+                        Placeholder="Nombres"
+                        BorderColor="#D4D7D8"
+                        BorderThickness="2"
+                        FontSize="15"
+                        WidthRequest="350"
+                        HeightRequest="55"
+                        CornerRadius="10"
+                        TextColor="#74787E"
+                        PlaceholderColor="#647B9D"/>
+                    <controls:CustomEntry
+                        Placeholder="Apellidos"
+                        BorderColor="#D4D7D8"
+                        BorderThickness="2"
+                        FontSize="15"
+                        WidthRequest="350"
+                        HeightRequest="55"
+                        CornerRadius="10"
+                        TextColor="#74787E"
+                        PlaceholderColor="#647B9D"/>
+                    <controls:CustomEntry
+                        Placeholder="Celular"
+                        BorderColor="#D4D7D8"
+                        BorderThickness="2"
+                        FontSize="15"
+                        WidthRequest="350"
+                        HeightRequest="55"
+                        CornerRadius="10"
+                        TextColor="#74787E"
+                        PlaceholderColor="#647B9D"/>
+                    <controls:CustomEntry
+                        Placeholder="Correo"
+                        BorderColor="#D4D7D8"
+                        BorderThickness="2"
+                        FontSize="15"
+                        WidthRequest="350"
+                        HeightRequest="55"
+                        CornerRadius="10"
+                        TextColor="#74787E"
+                        PlaceholderColor="#647B9D"/>
+                </StackLayout>
+                <StackLayout Grid.Row="2" HorizontalOptions="Center">
+                    <Button
+                        Text="Registrarse"
+                        BackgroundColor="#EE2323"
+                        TextColor="#F4F6FA"
+                        WidthRequest="180"
+                        CornerRadius="25"
+                        FontSize="18"
+                        FontAttributes="Bold">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </StackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -4,7 +4,7 @@
              x:Class="DancellApp.Views.LoginScreenPage"    
              xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
              xmlns:controls="clr-namespace:DancellApp.Controls"
-             BackgroundColor="White"
+             BackgroundColor="#E1EAF9"
              x:DataType="viewModels:LoginScreenViewModels">
     <ScrollView>
         <VerticalStackLayout>
@@ -14,12 +14,15 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackLayout Grid.Row="0">
                     <Image
                         Source="dancell_asset"
                         Aspect="Fill"
-                        HeightRequest="280"/>
+                        HeightRequest="250"/>
                 </StackLayout>
                 <StackLayout Grid.Row="1" Margin="20" Spacing="15">
                     <controls:CustomEntry
@@ -46,7 +49,8 @@
                     <Button
                         Text="¿Has olvidado tu contraseña?"
                         FontSize="14"
-                        TextColor="#3880ff">
+                        TextColor="#3880FF"
+                        BackgroundColor="Transparent">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroupList>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -65,17 +69,76 @@
                         </VisualStateManager.VisualStateGroups>
                     </Button>
                 </StackLayout>
-                <StackLayout Grid.Row="3" HorizontalOptions="Center" Padding="0,20">
+                <StackLayout Grid.Row="3" HorizontalOptions="Center" Padding="0,16">
                     <Button
                         Text="Iniciar Sesion"
                         BackgroundColor="#EE2323"
                         TextColor="White" 
                         CornerRadius="25"
-                        WidthRequest="180"
+                        WidthRequest="190"
                         FontSize="18"
                         FontAttributes="Bold">
-                        
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
                     </Button>
+                </StackLayout>
+                <StackLayout Grid.Row="4" Margin="0,20" HorizontalOptions="Center">
+                    <Label
+                        Text="O atravez de las redes sociales"
+                        FontSize="14"
+                        TextColor="#898585"
+                        FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout Grid.Row="5"  Margin="0,20" HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="5">
+                        <ImageButton Source="facebook"/>
+                        <ImageButton Source="google"/>
+                    </HorizontalStackLayout>
+                </StackLayout>
+                <StackLayout Grid.Row="6" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
+                    <HorizontalStackLayout Spacing="2">
+                        <Label
+                            Text="¿No tienes una cuenta?"
+                            TextColor="#959AA1"/>
+                        <Button
+                            BackgroundColor="Transparent"
+                            Text="Registrate"
+                            FontAttributes="Bold"
+                            TextColor="#535558"
+                            Padding="0"
+                            Command="{Binding NavSingUpCommand}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
+                    </HorizontalStackLayout>
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>
