@@ -22,7 +22,7 @@ namespace DancellApp.ViewModels
 
         #region Services
         private UserService userService;
-        private BaseService baseService;
+        private DataBaseConstants baseService;
         #endregion
         #region Constructor
         public LoginScreenViewModels()
@@ -32,7 +32,7 @@ namespace DancellApp.ViewModels
             NavSingUpCommand = new AsyncRelayCommand(NavSingUp);
             LoginCommand = new AsyncRelayCommand(GetByUserAndPassword);
             userService = new UserService();
-            baseService = new BaseService();
+            baseService = new DataBaseConstants();
         }
         #endregion
 
@@ -97,7 +97,8 @@ namespace DancellApp.ViewModels
                 return;
             }
             var user = JsonConvert.DeserializeObject<Usuario>(result.Objeto.ToString());
-            await this.baseService.SaveUserAsync(user);
+
+            this.baseService.SaveUserAsync(user);
         }
         #endregion
     }

@@ -13,18 +13,19 @@ public partial class App : Microsoft.Maui.Controls.Application
 	public static MasterPage Master { get; internal set; }
     public new static App Current => (App)Microsoft.Maui.Controls.Application.Current;
     public IServiceProvider Services { get; }
-    public BaseService database { get; set; }
+    public DataBaseConstants database { get; set; }
     #endregion
-    public App(BaseService baseService)
+    public App(DataBaseConstants baseService)
 	{
         App.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         var services = new ServiceCollection();
         Services = ConfigureServices(services);
         database = baseService;
         var user = GetUserAct();
-        if (user.IsCompletedSuccessfully)
+        if (user != null)
         {
-            MainPage = new NavigationPage(new HomePage());
+            MainPage = new NavigationPage(new MasterPage());
+            database.DeleteUser(user);
         }
         else
         {
@@ -38,15 +39,15 @@ public partial class App : Microsoft.Maui.Controls.Application
 	{
 		services.AddTransient<LoginViewModels>();
         services.AddTransient<LoginScreenViewModels>();
+        services.AddTransient<DataBaseConstants>();
 
         services.AddSingleton<LoginScreenPage>();
 
 		return services.BuildServiceProvider();
     }
 
-    public async Task<Usuario> GetUserAct()
+    public  Usuario GetUserAct()
     {
-        BaseService baseService = new BaseService();
-        return await database.GetUserAsync();
+        return database.GetUserAsync();
     }
 }

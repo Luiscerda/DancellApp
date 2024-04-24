@@ -6,10 +6,16 @@
     xmlns:local="clr-namespace:DancellApp"
     xmlns:views="clr-namespace:DancellApp.Views"
     Shell.FlyoutBehavior="Disabled"
-    Shell.BackgroundColor="#EE2323">
+    FlyoutBackground="#EE2323"
+    FlyoutHeaderBehavior="Fixed">
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
+    <ShellContent
+        Shell.FlyoutBehavior="Flyout"
+        ContentTemplate="{DataTemplate views:MasterPage}"
+        Route="MasterPage" />
 
 </Shell>

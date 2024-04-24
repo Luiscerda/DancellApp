@@ -23,7 +23,7 @@ public static class MauiProgram
                 CustomEntryMapper.Map(handler, view);
 			}
 		});
-        builder.Services.AddSingleton<BaseService>();
+        builder.Services.AddSingleton<DataBaseConstants>();
 
         return builder.Build();
 	}

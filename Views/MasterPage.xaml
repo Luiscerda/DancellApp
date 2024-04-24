@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:DancellApp.Views"
              x:Class="DancellApp.Views.MasterPage"
-            BackgroundColor="#EE2323">
+            BackgroundColor="#EE2323"
+            Shell.FlyoutBehavior="Flyout"
+            >
     <FlyoutPage.Flyout>
         <local:MenuPage/>
     </FlyoutPage.Flyout>
