@@ -1,4 +1,5 @@
-﻿using DancellApp.Services;
+﻿using DancellApp.Models;
+using DancellApp.Services;
 using DancellApp.ViewModels;
 using DancellApp.Views;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
@@ -16,9 +17,10 @@ public partial class App : Microsoft.Maui.Controls.Application
     public App()
 	{
         App.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-        var services = new ServiceCollection();
-        Services = ConfigureServices(services);
+        
+        
         InitializeComponent();
+        //var user = GetUserAct();
         MainPage = new AppShell();
 
     }
@@ -31,5 +33,10 @@ public partial class App : Microsoft.Maui.Controls.Application
         services.AddSingleton<LoginScreenPage>();
 
 		return services.BuildServiceProvider();
+    }
+    public async Task<Usuario> GetUserAct()
+    {
+        BaseService baseService = new BaseService();
+        return await baseService.GetUserAsync();
     }
 }

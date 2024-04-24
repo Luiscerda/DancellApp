@@ -9,13 +9,6 @@ namespace DancellApp.Services
     public class UserService
     {
         string urlBase = Application.Current.Resources["UrlBase"].ToString();
-        public Usuario First()
-        {
-            using (var da = new DataAcces())
-            {
-                return da.GetUsuarios().FirstOrDefault();
-            }
-        }
 
         public async Task<IAjaxResult> GetByUserAndPassword(string controller ,string userName, string password)
         {

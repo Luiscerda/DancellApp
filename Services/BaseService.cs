@@ -10,23 +10,41 @@ namespace DancellApp.Services
 {
     public class BaseService
     {
-        protected readonly DbContext dbContext;
+        SQLiteAsyncConnection Database;
         public string StatusMessage;
 
-        public BaseService(DbContext dbContext)
+        public BaseService()
         {
-            this.dbContext = dbContext;
-            _ = Init(this.dbContext);
+
         }
 
-        public async Task Init(DbContext dbContext)
+        public async Task Init()
         {
-            if (dbContext.Database is not null)
+            if (Database is not null)
                 return;
 
-            dbContext.Database = new SQLite.SQLiteAsyncConnection(DataBaseConstants.DatabasePath, DataBaseConstants.flags);
+            Database = new SQLiteAsyncConnection(DataBaseConstants.DatabasePath, DataBaseConstants.flags);
 
-            var migrationResult = await dbContext.Database.CreateTablesAsync(CreateFlags.None, typeof(Usuario));
+            var result = await Database.CreateTableAsync<Usuario>();
+        }
+
+        public async Task<int> SaveUserAsync(Usuario usuario)
+        {
+            await Init();
+            if(usuario.IdUser != 0)
+            {
+                return await Database.UpdateAsync(usuario);
+            }
+            else
+            {
+                return await Database.InsertAsync(usuario);
+            }
+        }
+
+        public async Task<Usuario> GetUserAsync()
+        {
+            await Init();
+            return await Database.Table<Usuario>().FirstOrDefaultAsync();
         }
     }
 }

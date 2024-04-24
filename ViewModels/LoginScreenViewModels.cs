@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using DancellApp.Models;
 using DancellApp.Services;
 using DancellApp.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace DancellApp.ViewModels
 
         #region Services
         private UserService userService;
+        private BaseService baseService;
         #endregion
         #region Constructor
         public LoginScreenViewModels()
@@ -29,6 +32,7 @@ namespace DancellApp.ViewModels
             NavSingUpCommand = new AsyncRelayCommand(NavSingUp);
             LoginCommand = new AsyncRelayCommand(GetByUserAndPassword);
             userService = new UserService();
+            baseService = new BaseService();
         }
         #endregion
 
@@ -82,6 +86,18 @@ namespace DancellApp.ViewModels
                     "OK");
                 return;
             }
+            if (result.Objeto == null)
+            {
+                //this.IsRunning = false;
+                //this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "No se pudo iniciar sesion verifique los datos",
+                    "OK");
+                return;
+            }
+            var user = JsonConvert.DeserializeObject<Usuario>(result.Objeto.ToString());
+            await this.baseService.SaveUserAsync(user);
         }
         #endregion
     }
