@@ -13,15 +13,24 @@ public partial class App : Microsoft.Maui.Controls.Application
 	public static MasterPage Master { get; internal set; }
     public new static App Current => (App)Microsoft.Maui.Controls.Application.Current;
     public IServiceProvider Services { get; }
+    public BaseService database { get; set; }
     #endregion
-    public App()
+    public App(BaseService baseService)
 	{
         App.Current.On<Microsoft.Maui.Controls.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-        
-        
+        var services = new ServiceCollection();
+        Services = ConfigureServices(services);
+        database = baseService;
+        var user = GetUserAct();
+        if (user.IsCompletedSuccessfully)
+        {
+            MainPage = new NavigationPage(new HomePage());
+        }
+        else
+        {
+            MainPage = new AppShell();
+        }
         InitializeComponent();
-        //var user = GetUserAct();
-        MainPage = new AppShell();
 
     }
 
@@ -34,9 +43,10 @@ public partial class App : Microsoft.Maui.Controls.Application
 
 		return services.BuildServiceProvider();
     }
+
     public async Task<Usuario> GetUserAct()
     {
         BaseService baseService = new BaseService();
-        return await baseService.GetUserAsync();
+        return await database.GetUserAsync();
     }
 }

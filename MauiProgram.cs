@@ -1,6 +1,7 @@
 ﻿namespace DancellApp;
 using DancellApp.Controls;
 using DancellApp.Platforms;
+using DancellApp.Services;
 
 public static class MauiProgram
 {
@@ -22,7 +23,8 @@ public static class MauiProgram
                 CustomEntryMapper.Map(handler, view);
 			}
 		});
+        builder.Services.AddSingleton<BaseService>();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }
