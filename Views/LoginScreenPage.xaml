@@ -33,6 +33,7 @@
                         HeightRequest="55"
                         CornerRadius="10"
                         TextColor="#647B9D"
+                        Text="{Binding UserName,Mode=TwoWay}"
                         PlaceholderColor="#647B9D"/>
                     <controls:CustomEntry
                         Placeholder="Contraseña"
@@ -43,7 +44,8 @@
                         CornerRadius="10"
                         TextColor="#647B9D"
                         PlaceholderColor="#647B9D"
-                        IsPassword="True"/>
+                        IsPassword="True"
+                        Text="{Binding Password, Mode=TwoWay}"/>
                 </StackLayout>
                 <StackLayout Grid.Row="2" Margin="10,-10" HorizontalOptions="End">
                     <Button
@@ -71,6 +73,7 @@
                 </StackLayout>
                 <StackLayout Grid.Row="3" HorizontalOptions="Center" Padding="0,16">
                     <Button
+                        Command="{Binding LoginCommand}"
                         Text="Iniciar Sesion"
                         BackgroundColor="#EE2323"
                         TextColor="White" 
