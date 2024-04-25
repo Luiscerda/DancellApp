@@ -22,10 +22,10 @@ public partial class App : Microsoft.Maui.Controls.Application
         Services = ConfigureServices(services);
         database = baseService;
         var user = GetUserAct();
+        
         if (user != null)
         {
             MainPage = new MasterPage();
-            database.DeleteUser(user);
         }
         else
         {
@@ -40,11 +40,13 @@ public partial class App : Microsoft.Maui.Controls.Application
 	{
 		services.AddTransient<LoginViewModels>();
         services.AddTransient<LoginScreenViewModels>();
+        services.AddTransient<FlyoutMenuViewModels>();
         services.AddTransient<DataBaseConstants>();
 
         services.AddSingleton<LoginScreenPage>();
+        services.AddSingleton<FlyoutMenuPage>();
 
-		return services.BuildServiceProvider();
+        return services.BuildServiceProvider();
     }
 
     public  Usuario GetUserAct()

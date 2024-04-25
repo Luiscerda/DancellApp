@@ -27,7 +27,7 @@ namespace DancellApp.ViewModels
         #region Constructor
         public LoginScreenViewModels()
         {
-            UserName = "admin";
+            UserName = "1124056719Martinez";
             Password = "DANcell2020";
             NavSingUpCommand = new AsyncRelayCommand(NavSingUp);
             LoginCommand = new AsyncRelayCommand(GetByUserAndPassword);
@@ -99,6 +99,7 @@ namespace DancellApp.ViewModels
             var user = JsonConvert.DeserializeObject<Usuario>(result.Objeto.ToString());
 
             this.baseService.SaveUserAsync(user);
+            Application.Current.MainPage = new MasterPage(); 
         }
         #endregion
     }

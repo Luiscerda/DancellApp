@@ -7,9 +7,9 @@
     xmlns:views="clr-namespace:DancellApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Shell.NavBarIsVisible="True"
+    Shell.BackgroundColor="#ee2323"
     Shell.NavBarHasShadow="False"
-    Shell.FlyoutBackdrop="Beige"
-    FlyoutBackground="#EE2323">
+    Shell.FlyoutBackdrop="Beige">
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
@@ -19,5 +19,9 @@
         Shell.FlyoutBehavior="Locked"
         ContentTemplate="{DataTemplate views:MasterPage}"
         Route="MasterPage" />
+
+    <Shell.FlyoutFooter>
+        <views:SingupPage/>
+    </Shell.FlyoutFooter>
 
 </Shell>

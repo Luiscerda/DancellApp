@@ -2,28 +2,72 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DancellApp.Views.FlyoutMenuPage"
+             xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
              Title="FlyoutMenuPage"
-             BackgroundColor="#EE2323">
-    <VerticalStackLayout>
+             BackgroundColor="#D4D7DB">
+    <VerticalStackLayout VerticalOptions="Start" Spacing="5">
+        <Border WidthRequest="150"
+                HeightRequest="150"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 50"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="0,10">
+            <Border.Shadow>
+                <Shadow
+                    Brush="#E1EAF9"
+                    Offset="10,10"
+                    Opacity=".8"
+                    />
+            </Border.Shadow>
+            <Image
+                Source="https://devblogs.microsoft.com/xamarin/wp-content/uploads/sites/44/2019/03/Screen-Shot-2017-01-03-at-3.35.53-PM.png"/>
+        </Border>
         <Label 
-            TextColor="White"
-            Text="DESCRIPCION ROL"
+            TextColor="#647B9D"
+            Text="{Binding User.NameProfile}"
             FontSize="20"
-            Margin="30"
-            HorizontalTextAlignment="Center"/>
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"/>
+        <Label 
+            TextColor="#647B9D"
+            Text="{Binding User.DesRol}"
+            FontSize="15"
+            HorizontalTextAlignment="Center"
+            FontAttributes="Bold"/>
         <BoxView
-            Color="White"
+            Color="#E1EAF9"
             HeightRequest="1"
-            HorizontalOptions="FillAndExpand"/>
-        <Label
-            Text="NOMBRE ASESOR"
-            TextColor="White"
-            Margin="30"
-            FontSize="21"
-            HorizontalTextAlignment="Center"/>
-        <BoxView
-             Color="White"
-             HeightRequest="1"
-             HorizontalOptions="FillAndExpand"/>
+            HorizontalOptions="FillAndExpand"
+            StyleClass="Separator"/>
+        <ListView ItemsSource="{Binding MenuItems}" SeparatorVisibility="None" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid ColumnSpacing="15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Source="{Binding Icon}"
+                                Grid.Column="0"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                Aspect="AspectFill"/>
+                            <Label
+                                VerticalTextAlignment="Center"
+                                Text="{Binding Name}"
+                                TextColor="#53565A"
+                                Grid.Column="1"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
 </ContentPage>
