@@ -24,13 +24,14 @@ public partial class App : Microsoft.Maui.Controls.Application
         var user = GetUserAct();
         if (user != null)
         {
-            MainPage = new NavigationPage(new MasterPage());
+            MainPage = new MasterPage();
             database.DeleteUser(user);
         }
         else
         {
             MainPage = new AppShell();
         }
+        
         InitializeComponent();
 
     }

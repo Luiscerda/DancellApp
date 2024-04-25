@@ -6,15 +6,17 @@
     xmlns:local="clr-namespace:DancellApp"
     xmlns:views="clr-namespace:DancellApp.Views"
     Shell.FlyoutBehavior="Disabled"
-    FlyoutBackground="#EE2323"
-    FlyoutHeaderBehavior="Fixed">
+    Shell.NavBarIsVisible="True"
+    Shell.NavBarHasShadow="False"
+    Shell.FlyoutBackdrop="Beige"
+    FlyoutBackground="#EE2323">
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
     <ShellContent
-        Shell.FlyoutBehavior="Flyout"
+        Shell.FlyoutBehavior="Locked"
         ContentTemplate="{DataTemplate views:MasterPage}"
         Route="MasterPage" />
 
