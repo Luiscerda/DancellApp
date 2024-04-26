@@ -1,6 +1,8 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using AndroidX.Navigation;
+using CommunityToolkit.Mvvm.Input;
 using DancellApp.Models;
 using DancellApp.Services;
+using DancellApp.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -66,20 +68,32 @@ namespace DancellApp.ViewModels
             menu.Add(new MenuItemModel 
             { 
                 Icon = "home", 
-                Name = "INICIO" 
+                Name = "INICIO",
+                TargetType = typeof(HomePage),
             });
             menu.Add(new MenuItemModel
             {
                 Icon = "user",
-                Name = "PERFIL"
+                Name = "PERFIL",
+                TargetType = typeof(ProfilePage)
             });
 
             MenuItems = new ObservableCollection<MenuItemModel>(menu);
         }
 
-        public void SelectNavPage(MenuItemModel menuItem)
+        public async void SelectNavPage(MenuItemModel menuItem)
         {
-            var l = menuItem;
+            switch(menuItem.Name)
+            {
+                case "INICIO":
+                    App.Master.IsPresented = false;
+                    await App.Navigator.PopAsync();
+                    break;
+                case "PERFIL":
+                    App.Master.IsPresented = false;
+                    await App.Navigator.PushAsync(new ProfilePage());                  
+                    break;
+            }
         }
         #endregion
 

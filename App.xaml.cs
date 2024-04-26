@@ -9,7 +9,7 @@ namespace DancellApp;
 public partial class App : Microsoft.Maui.Controls.Application
 {
 	#region Properties
-	public static NavigationPage Navigation { get; internal set; }
+	public static NavigationPage Navigator { get; internal set; }
 	public static MasterPage Master { get; internal set; }
     public new static App Current => (App)Microsoft.Maui.Controls.Application.Current;
     public IServiceProvider Services { get; }
@@ -26,6 +26,7 @@ public partial class App : Microsoft.Maui.Controls.Application
         if (user != null)
         {
             MainPage = new MasterPage();
+            database.DeleteUser(user);
         }
         else
         {
@@ -42,8 +43,10 @@ public partial class App : Microsoft.Maui.Controls.Application
         services.AddTransient<LoginScreenViewModels>();
         services.AddTransient<FlyoutMenuViewModels>();
         services.AddTransient<DataBaseConstants>();
+        services.AddTransient<LoginScreenPage>();
 
         services.AddSingleton<LoginScreenPage>();
+        services.AddSingleton<ProfilePage>();
         services.AddSingleton<FlyoutMenuPage>();
 
         return services.BuildServiceProvider();

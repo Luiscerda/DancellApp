@@ -5,10 +5,10 @@
              x:Class="DancellApp.Views.MasterPage"
             Shell.FlyoutBehavior="Locked">
     <FlyoutPage.Flyout>
-        <local:FlyoutMenuPage/>
+        <local:FlyoutMenuPage x:Name="flyoutPage"/>
     </FlyoutPage.Flyout>
     <FlyoutPage.Detail>
-        <NavigationPage>
+        <NavigationPage x:Name="Navigator">
             <x:Arguments>
                 <local:HomePage/>
             </x:Arguments>

@@ -65,7 +65,8 @@
                                 Text="INVENTARIO"
                                 TextColor="#EE2323"
                                 VerticalOptions="StartAndExpand"
-                                WidthRequest="150">
+                                WidthRequest="150"
+                                Clicked="Button_Clicked">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroupList>
 

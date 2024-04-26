@@ -7,11 +7,16 @@
              Title="FlyoutMenuPage"
              BackgroundColor="#D4D7DB">
     <ContentPage.Resources>
-        <Style TargetType="Grid">
+        <Style TargetType="SwipeView">
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+            Value="Transparent" />
+                            </VisualState.Setters>
+                        </VisualState>
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" 
@@ -60,44 +65,47 @@
             HeightRequest="1"
             HorizontalOptions="FillAndExpand"
             StyleClass="Separator"/>
-        <CollectionView ItemsSource="{Binding MenuItems}" SelectionMode="Single" x:Name="collectionView">
+        <CollectionView ItemsSource="{Binding MenuItems}" SelectionMode="Single" x:Name="collectionView" x:FieldModifier="public">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="5" ColumnSpacing="10">
-                        <Grid.GestureRecognizers>
+                    <SwipeView>
+                        <SwipeView.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.SelectNavPageCommand}" CommandParameter="{Binding}"/>
-                        </Grid.GestureRecognizers>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Border
-                            Grid.Column="0"
-                            StrokeShape="RoundRectangle 50"
-                            StrokeThickness="1"
-                            HeightRequest="50"
-                            WidthRequest="50">
-                            <Border.Shadow>
-                                <Shadow
-                                    Brush="#E1EAF9"
-                                    Offset="10,10"
-                                    Opacity=".8"/>
-                            </Border.Shadow>
-                            <Image
-                                Source="{Binding Icon}"
-                                HeightRequest="40"
-                                WidthRequest="40"/>
-                        </Border>
-                        <Label
+                        </SwipeView.GestureRecognizers>
+                        <Grid Padding="5" ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border
+                                Grid.Column="0"
+                                StrokeShape="RoundRectangle 50"
+                                StrokeThickness="1"
+                                HeightRequest="50"
+                                WidthRequest="50">
+                                <Border.Shadow>
+                                    <Shadow
+                                        Brush="#E1EAF9"
+                                        Offset="10,10"
+                                        Opacity=".8"/>
+                                </Border.Shadow>
+                                <Image
+                                    Source="{Binding Icon}"
+                                    HeightRequest="40"
+                                    WidthRequest="40"/>
+                            </Border>
+                            <Label
                             VerticalTextAlignment="Center"
                             Text="{Binding Name}"
                             TextColor="#53565A"
                             Grid.Column="1"/>
-                    </Grid>
+                        </Grid>
+                    </SwipeView>
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
