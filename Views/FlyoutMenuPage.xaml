@@ -16,6 +16,8 @@
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" 
                                         Value="#E1EAF9" />
+                                <Setter Property="Margin" 
+                                        Value="20,0" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -58,10 +60,13 @@
             HeightRequest="1"
             HorizontalOptions="FillAndExpand"
             StyleClass="Separator"/>
-        <CollectionView ItemsSource="{Binding MenuItems}" SelectionMode="Single">
+        <CollectionView ItemsSource="{Binding MenuItems}" SelectionMode="Single" x:Name="collectionView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="5" ColumnSpacing="10">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.SelectNavPageCommand}" CommandParameter="{Binding}"/>
+                        </Grid.GestureRecognizers>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -87,7 +92,6 @@
                                 HeightRequest="40"
                                 WidthRequest="40"/>
                         </Border>
-                        
                         <Label
                             VerticalTextAlignment="Center"
                             Text="{Binding Name}"

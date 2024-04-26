@@ -1,6 +1,8 @@
-﻿using DancellApp.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using DancellApp.Models;
 using DancellApp.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace DancellApp.ViewModels
 {
@@ -17,7 +19,6 @@ namespace DancellApp.ViewModels
             User = baseConstants.GetUserAsync();
             menu = new List<MenuItemModel>();
             LoadMenu();
-
         }
 
         public FlyoutMenuViewModels(Usuario user)
@@ -29,6 +30,7 @@ namespace DancellApp.ViewModels
         #region Attributes
         private Usuario user;
         readonly IList<MenuItemModel> menu;
+        MenuItemModel selectedItem;
         #endregion
 
         #region Propperties
@@ -37,6 +39,22 @@ namespace DancellApp.ViewModels
             get => user;
             set => SetProperty(ref user, value);
         }
+        public MenuItemModel SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                if (selectedItem != value)
+                {
+                    selectedItem = value;
+                }
+            }
+        }
+
+        public ICommand SelectNavPageCommand => new Command<MenuItemModel>(SelectNavPage);
         public ObservableCollection<MenuItemModel> MenuItems { get; private set; }
         
         #endregion
@@ -58,6 +76,15 @@ namespace DancellApp.ViewModels
 
             MenuItems = new ObservableCollection<MenuItemModel>(menu);
         }
+
+        public void SelectNavPage(MenuItemModel menuItem)
+        {
+            var l = menuItem;
+        }
+        #endregion
+
+        #region Commands
+
         #endregion
 
     }
