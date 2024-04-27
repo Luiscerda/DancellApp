@@ -1,10 +1,10 @@
-﻿using AndroidX.Navigation;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using DancellApp.Models;
 using DancellApp.Services;
 using DancellApp.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DancellApp.ViewModels
 {
@@ -21,6 +21,7 @@ namespace DancellApp.ViewModels
             User = baseConstants.GetUserAsync();
             menu = new List<MenuItemModel>();
             LoadMenu();
+            PickImageCommand = new Command(() => DoPickImage());
         }
 
         public FlyoutMenuViewModels(Usuario user)
@@ -32,7 +33,10 @@ namespace DancellApp.ViewModels
         #region Attributes
         private Usuario user;
         readonly IList<MenuItemModel> menu;
+        private string text;
         MenuItemModel selectedItem;
+        private ImageSource image;
+        private bool isImageVisible;
         #endregion
 
         #region Propperties
@@ -40,6 +44,21 @@ namespace DancellApp.ViewModels
         {
             get => user;
             set => SetProperty(ref user, value);
+        }
+        public string Text
+        {
+            get => text;
+            set => SetProperty(ref text, value);
+        }
+        public ImageSource Image
+        {
+            get => image;
+            set => SetProperty(ref image, value);
+        }
+        public bool IsImageVisible
+        {
+            get => isImageVisible;
+            set => SetProperty(ref isImageVisible, value);
         }
         public MenuItemModel SelectedItem
         {
@@ -57,6 +76,7 @@ namespace DancellApp.ViewModels
         }
 
         public ICommand SelectNavPageCommand => new Command<MenuItemModel>(SelectNavPage);
+        public ICommand PickImageCommand { get; }
         public ObservableCollection<MenuItemModel> MenuItems { get; private set; }
         
         #endregion
@@ -94,6 +114,69 @@ namespace DancellApp.ViewModels
                     await App.Navigator.PushAsync(new ProfilePage());                  
                     break;
             }
+        }
+
+        async Task<FileResult> PickAndShow(MediaPickerOptions options)
+        {
+            try
+            {
+                var result = await MediaPicker.CapturePhotoAsync(options);
+
+                if (result != null)
+                {
+                    var size = await GetStreamSizeAsync(result);
+
+                    Text = $"File Name: {result.FileName} ({size:0.00} KB)";
+
+                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();
+                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif")
+                    {
+                        var stream = await result.OpenReadAsync();
+
+                        Image = ImageSource.FromStream(() => stream);
+                        IsImageVisible = true;
+                    }
+                    else
+                    {
+                        IsImageVisible = false;
+                    }
+                }
+                else
+                {
+                    Text = $"Pick cancelled.";
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Text = ex.ToString();
+                IsImageVisible = false;
+                return null;
+            }
+        }
+
+        async Task<double> GetStreamSizeAsync(FileResult result)
+        {
+            try
+            {
+                using var stream = await result.OpenReadAsync();
+                return stream.Length / 1024.0;
+            }
+            catch
+            {
+                return 0.0;
+            }
+        }
+
+        async void DoPickImage()
+        {
+            var options = new MediaPickerOptions
+            {
+                Title = "Please select an image"
+            };
+
+            await PickAndShow(options);
         }
         #endregion
 

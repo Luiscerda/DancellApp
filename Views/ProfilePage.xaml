@@ -4,12 +4,182 @@
              x:Class="DancellApp.Views.ProfilePage"
              Title="Perfil"
              xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
-             x:DataType="viewModels:LoginScreenViewModels"
+             xmlns:control="clr-namespace:DancellApp.Controls"
              BackgroundColor="#E1EAF9">
+    <ContentPage.BindingContext>
+        <viewModels:ProfileViewModels/>
+    </ContentPage.BindingContext>
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Border 
+            WidthRequest="140"
+            HeightRequest="140"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 50"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Margin="0,10">
+            <Border.Shadow>
+                <Shadow
+                    Brush="#E1EAF9"
+                    Offset="10,10"
+                    Opacity=".8"/>
+            </Border.Shadow>
+            <Image
+                Source="https://devblogs.microsoft.com/xamarin/wp-content/uploads/sites/44/2019/03/Screen-Shot-2017-01-03-at-3.35.53-PM.png"
+                Aspect="Fill"/>
+            <!--<Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding PickImageCommand}"/>
+            </Border.GestureRecognizers>-->
+        </Border>
+        <StackLayout Margin="20,0" HorizontalOptions="Center">
+            <Border 
+                StrokeShape="RoundRectangle 30"
+                StrokeThickness="1"
+                VerticalOptions="Center"
+                HeightRequest="250"
+                WidthRequest="350">
+                <Grid RowSpacing="10" Margin="15,15" HorizontalOptions="Start" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="Cargo"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="{Binding User.DesRol}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                    <Label
+                        Grid.Row="1"
+                        Text="Identificación"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Text="{Binding User.Identificacion}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                    <Label
+                        Grid.Row="2"
+                        Text="Nombre"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Text="{Binding User.Nombre}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                    <Label
+                        Grid.Row="3"
+                        Text="Apellido"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Text="{Binding User.Apellido}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                    <Label
+                        Grid.Row="4"
+                        Text="Celular"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Text="{Binding User.Telefono}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                    <Label
+                        Grid.Row="5"
+                        Text="Correo"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Text="{Binding User.Correo}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                    <Label
+                        Grid.Row="6"
+                        Text="Zona"
+                        TextColor="#53565A"
+                        FontSize="15"
+                        FontAttributes="Bold"/>
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Text="{Binding User.Zona}"
+                        TextColor="#888C91"
+                        FontSize="15"/>
+                </Grid>
+            </Border>
+            <StackLayout Margin="0,40" HorizontalOptions="Center">
+                <HorizontalStackLayout Spacing="5">
+                    <Button Text="EDITAR PERFIL" BackgroundColor="#EE2323" TextColor="White" CornerRadius="25" FontAttributes="Bold" WidthRequest="140">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                    <Button Text="CAMBIAR CONTRASEÑA" BackgroundColor="Transparent" TextColor="#53565A" BorderColor="#53565A" BorderWidth="2" CornerRadius="25" FontAttributes="Bold" WidthRequest="190">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </HorizontalStackLayout>
+            </StackLayout>
+        </StackLayout>
+
     </VerticalStackLayout>
 </ContentPage>
