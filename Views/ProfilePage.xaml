@@ -141,7 +141,7 @@
             </Border>
             <StackLayout Margin="0,40" HorizontalOptions="Center">
                 <HorizontalStackLayout Spacing="5">
-                    <Button Text="EDITAR PERFIL" BackgroundColor="#EE2323" TextColor="White" CornerRadius="25" FontAttributes="Bold" WidthRequest="140">
+                    <Button Text="EDITAR PERFIL" BackgroundColor="#EE2323" TextColor="White" CornerRadius="25" FontAttributes="Bold" WidthRequest="140" Command="{Binding NavEditProfilePageCommand}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroupList>
                                 <VisualStateGroup x:Name="CommonStates">

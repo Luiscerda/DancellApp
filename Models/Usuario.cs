@@ -24,6 +24,8 @@
         public DateTime FechaGestion { get; set; }
         public string Identificacion { get; set; }
         public int EquipoPort { get; set; }
+        public byte ImageProfile { get; set; }
+        public string UrlImageProfile { get; set; }
         public string FullName
         {
             get
