@@ -26,22 +26,25 @@ namespace DancellApp.Services
                 {
                     var size = await GetStreamSizeAsync(result);
                     
-
                     imageModel.Text = $"File Name: {result.FileName} ({size:0.00} KB)";
-                    //imageModel.Text = $"Resources\\Images\\ {result.FileName} ({size:0.00} KB) {DateTime.Now}";
-                    string localFilePath = Path.Combine("Resources\\Images", imageModel.Text);
-                    //fileSaver.SaveAsync("SampleFile.txt", stream, cancellationTokenSource.Token);
-                    var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
-                    var filePath = Path.Combine(folderPath, imageModel.Text);
-                    var fileStream = File.Create(filePath);
 
-                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();
-                    
+                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();                   
                     if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif")
                     {
                         var stream = await result.OpenReadAsync();
-                        imageModel.Image = ImageSource.FromStream(() => stream);
-                        imageModel.IsVisible = true;
+                        string fileDestiny = Path.Combine(FileSystem.Current.AppDataDirectory, Path.GetFileName(result.FileName));
+                        using var resourceStream = await FileSystem.OpenAppPackageFileAsync("DancellApp/Resources");
+                        if (resourceStream is FileStream)
+                        {
+                            string absolutePath = (resourceStream as FileStream).Name;
+                        }
+                        using (var fileStream = File.Create(fileDestiny))
+                        {
+                            imageModel.Image = ImageSource.FromStream(() => stream);
+                            imageModel.IsVisible = true;
+                            stream.Seek(0, SeekOrigin.Begin);
+                            stream.CopyTo(fileStream);
+                        }                     
                     }
                     else
                     {
