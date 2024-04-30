@@ -19,6 +19,11 @@ namespace DancellApp.ViewModels
         {
             baseConstants = new DataBaseConstants();
             User = baseConstants.GetUserAsync();
+            int indName = User.Nombre.IndexOf(" ");
+            var name = User.Nombre.Substring(0, indName);
+            int indLastName = User.Apellido.IndexOf(" ");
+            var lastName = User.Apellido.Substring(0, indLastName);
+            NameProfile = name + " " + lastName;
             menu = new List<MenuItemModel>();
             LoadMenu();
             PickImageCommand = new Command(() => DoPickImage());
@@ -34,6 +39,7 @@ namespace DancellApp.ViewModels
         private Usuario user;
         readonly IList<MenuItemModel> menu;
         private string text;
+        private string nameProfile;
         MenuItemModel selectedItem;
         private ImageSource image;
         private bool isImageVisible;
@@ -49,6 +55,11 @@ namespace DancellApp.ViewModels
         {
             get => text;
             set => SetProperty(ref text, value);
+        }
+        public string NameProfile
+        {
+            get => nameProfile;
+            set => SetProperty(ref nameProfile, value);
         }
         public ImageSource Image
         {

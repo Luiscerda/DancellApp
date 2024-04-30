@@ -33,7 +33,7 @@
     <VerticalStackLayout VerticalOptions="Start" Spacing="5">
         <Border WidthRequest="140"
                 HeightRequest="140"
-                StrokeThickness="1"
+                StrokeThickness="0"
                 StrokeShape="RoundRectangle 50"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
@@ -46,15 +46,15 @@
                     />
             </Border.Shadow>
             <Image
-                Source="{Binding Image}"
+                Source="avatar_user"
                 Aspect="Fill"/>
-            <Border.GestureRecognizers>
+            <!--<Border.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding PickImageCommand}"/>
-            </Border.GestureRecognizers>
+            </Border.GestureRecognizers>-->
         </Border>
         <Label 
             TextColor="#647B9D"
-            Text="{Binding User.NameProfile}"
+            Text="{Binding NameProfile, Mode=TwoWay}"
             FontSize="20"
             HorizontalTextAlignment="Center"
             FontAttributes="Bold"/>

@@ -13,7 +13,7 @@
         <Border 
             WidthRequest="140"
             HeightRequest="140"
-            StrokeThickness="1"
+            StrokeThickness="0"
             StrokeShape="RoundRectangle 50"
             VerticalOptions="Center"
             HorizontalOptions="Center"
@@ -25,7 +25,7 @@
                     Opacity=".8"/>
             </Border.Shadow>
             <Image
-                Source="https://devblogs.microsoft.com/xamarin/wp-content/uploads/sites/44/2019/03/Screen-Shot-2017-01-03-at-3.35.53-PM.png"
+                Source="avatar_user"
                 Aspect="Fill"/>
             <!--<Border.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding PickImageCommand}"/>

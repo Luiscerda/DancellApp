@@ -14,6 +14,7 @@ namespace DancellApp.ViewModels
         #region Services
         private readonly DataBaseConstants baseConstants;
         private LoadImageService loadImageService;
+        private UserService userService;
         #endregion
 
         #region Constructor
@@ -21,8 +22,10 @@ namespace DancellApp.ViewModels
         {
             baseConstants = new DataBaseConstants();
             loadImageService = new LoadImageService();
+            userService = new UserService();
             User = baseConstants.GetUserAsync();
             PickImageCommand = new Command(() => DoPickImage());
+            EditProfileCommand = new Command(() => EditProfile());
         }
         #endregion
 
@@ -39,6 +42,7 @@ namespace DancellApp.ViewModels
             set => SetProperty(ref image, value);
         }
         public ICommand PickImageCommand { get; }
+        public ICommand EditProfileCommand { get; }
         #endregion
 
         #region Attributes
@@ -92,7 +96,27 @@ namespace DancellApp.ViewModels
                     "Aceptar");
                 return;
             }
-
+            var result = await this.userService.EditProfileUser("/Administracion/UpdateUsuario", this.User);
+            if (result.Is_Error)
+            {
+                //this.IsRunning = false;
+                //this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    result.Msj,
+                    "OK");
+                return;
+            }
+            if (result.Objeto == null)
+            {
+                //this.IsRunning = false;
+                //this.IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "No se pudo editar la información.",
+                    "OK");
+                return;
+            }
         }
         #endregion
     }

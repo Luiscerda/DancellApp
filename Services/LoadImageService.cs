@@ -26,21 +26,15 @@ namespace DancellApp.Services
                 if (result != null)
                 {
                     var size = await GetStreamSizeAsync(result);
-                    
-                    imageModel.Text = $"File Name: {result.FileName} ({size:0.00} KB)";
-
-                    ruta = $"Resources/Images/{imageModel.Text}";
-                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();                   
+                    imageModel.Text = $"{result.FileName}";
+                  
+                    var ext = Path.GetExtension(result.FileName).ToLowerInvariant();
                     if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif")
                     {
-                        using (var fileStream = new FileStream(ruta, FileMode.Create))
-                        {
-                            var stream = await result.OpenReadAsync();
-                            //https://www.youtube.com/watch?v=TMWWpjFXiCc;
-                            imageModel.Image = ImageSource.FromStream(() => stream);
-                            imageModel.IsVisible = true;
-                        }
-                        
+                        var stream = await result.OpenReadAsync();
+                        imageModel.Image = ImageSource.FromStream(() => stream);
+                        imageModel.IsVisible = true;
+
                     }
                     else
                     {

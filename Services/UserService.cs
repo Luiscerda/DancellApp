@@ -48,5 +48,43 @@ namespace DancellApp.Services
             }
             return resultAjax;
         }
+
+        public async Task<IAjaxResult> EditProfileUser(string controller, Usuario usuario)
+        {
+            IAjaxResult resultAjax = new IAjaxResult();
+            try
+            {
+                string jsonUser = JsonConvert.SerializeObject(usuario);
+                var model = new Dictionary<string, string>
+                {
+                    {"usuario", jsonUser}
+                };
+                var request = JsonConvert.SerializeObject(jsonUser);
+                var content = new StringContent(request, Encoding.UTF8, "application/json");
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+                var url = string.Format("{0}", controller);
+                var response = await client.PostAsync(controller, new StringContent(jsonUser,
+                    Encoding.UTF8, "application/x-www-form-urlencoded"));
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new IAjaxResult
+                    {
+                        Msj = response.RequestMessage.ToString(),
+                        Is_Error = true,
+                    };
+                }
+                var result = await response.Content.ReadAsStringAsync();
+                resultAjax = JsonConvert.DeserializeObject<IAjaxResult>(result);
+            }
+            catch (Exception ex)
+            {
+                resultAjax.Msj = ex.Message;
+                resultAjax.Is_Error = true;
+            }
+            return resultAjax;
+        }
     }
 }

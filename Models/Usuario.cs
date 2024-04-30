@@ -34,18 +34,6 @@
             }
         }
 
-        public string NameProfile
-        {
-            get
-            {
-                int indName = Nombre.IndexOf(Value);
-                Nombre = Nombre.Substring(0, indName);
-                var indLastName = Apellido.IndexOf(Value);
-                Apellido = Apellido.Substring(0, indLastName);
-                return string.Format("{0} {1}", Nombre, Apellido);
-            }
-        }
-
         public string Zona
         {
             get
