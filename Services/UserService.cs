@@ -1,6 +1,7 @@
 ﻿using DancellApp.Interfaces;
 using DancellApp.Models;
 using Newtonsoft.Json;
+using System.Net;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
 
@@ -26,7 +27,6 @@ namespace DancellApp.Services
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-                var url = string.Format("{0}", controller);
                 var response = await client.PostAsync(controller, new StringContent(string.Format("UserName={0}&PassWord={1}",
                     userName, password),
                     Encoding.UTF8, "application/x-www-form-urlencoded"));
@@ -54,20 +54,10 @@ namespace DancellApp.Services
             IAjaxResult resultAjax = new IAjaxResult();
             try
             {
-                string jsonUser = JsonConvert.SerializeObject(usuario);
-                var model = new Dictionary<string, string>
-                {
-                    {"usuario", jsonUser}
-                };
-                var request = JsonConvert.SerializeObject(jsonUser);
+                var request = JsonConvert.SerializeObject(usuario);
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(urlBase)
-                };
-                var url = string.Format("{0}", controller);
-                var response = await client.PostAsync(controller, new StringContent(jsonUser,
-                    Encoding.UTF8, "application/x-www-form-urlencoded"));
+                var client = new HttpClient();
+                var response = await client.PostAsync(urlBase + controller, content);
                 if (!response.IsSuccessStatusCode)
                 {
                     return new IAjaxResult

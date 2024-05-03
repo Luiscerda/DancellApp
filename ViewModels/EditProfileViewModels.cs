@@ -107,16 +107,13 @@ namespace DancellApp.ViewModels
                     "OK");
                 return;
             }
-            if (result.Objeto == null)
-            {
-                //this.IsRunning = false;
-                //this.IsEnabled = true;
-                await Application.Current.MainPage.DisplayAlert(
-                    "Error",
-                    "No se pudo editar la información.",
-                    "OK");
-                return;
-            }
+            baseConstants.UpdateUser(user);
+            await Application.Current.MainPage.DisplayAlert(
+                   "Exito",
+                   result.Msj,
+                   "OK");
+            ProfileViewModels profileView = new ProfileViewModels(user);
+            await App.Navigator.PopAsync();
         }
         #endregion
     }

@@ -32,5 +32,10 @@
         {
            connection.Delete(user);
         }
+
+        public void UpdateUser(Usuario user)
+        {
+            connection.Update(user);
+        }
     }
 }

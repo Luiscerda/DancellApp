@@ -18,6 +18,7 @@ namespace DancellApp.ViewModels
 
         #region Attributes
         private Usuario user;
+        private bool isRefreshing;
         #endregion
 
         #region Constructor
@@ -26,6 +27,10 @@ namespace DancellApp.ViewModels
             baseConstants = new DataBaseConstants();
             User = baseConstants.GetUserAsync();
         }
+        public ProfileViewModels(Usuario usuario)
+        {
+            User = usuario;
+        }
         #endregion
 
         #region Properties
@@ -33,6 +38,11 @@ namespace DancellApp.ViewModels
         {
             get => user;
             set => SetProperty(ref user, value);
+        }
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set => SetProperty(ref isRefreshing, value);
         }
         public ICommand NavEditProfilePageCommand => new Command(NavEditProfilePage);
         #endregion
