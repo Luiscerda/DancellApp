@@ -1,5 +1,6 @@
 ﻿using DancellApp.Models;
 using DancellApp.Services;
+using DancellApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,13 +108,14 @@ namespace DancellApp.ViewModels
                     "OK");
                 return;
             }
-            baseConstants.UpdateUser(user);
+            baseConstants.UpdateUser(this.User);
             await Application.Current.MainPage.DisplayAlert(
                    "Exito",
                    result.Msj,
                    "OK");
-            ProfileViewModels profileView = new ProfileViewModels(user);
+            ProfilePage profilePage = new ProfilePage();
             await App.Navigator.PopAsync();
+            
         }
         #endregion
     }

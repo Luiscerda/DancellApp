@@ -27,10 +27,6 @@ namespace DancellApp.ViewModels
             baseConstants = new DataBaseConstants();
             User = baseConstants.GetUserAsync();
         }
-        public ProfileViewModels(Usuario usuario)
-        {
-            User = usuario;
-        }
         #endregion
 
         #region Properties
