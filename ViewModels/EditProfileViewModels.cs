@@ -27,6 +27,8 @@ namespace DancellApp.ViewModels
             User = baseConstants.GetUserAsync();
             PickImageCommand = new Command(() => DoPickImage());
             EditProfileCommand = new Command(() => EditProfile());
+            IsEnabled = true;
+            IsRunning = false;
         }
         #endregion
 
@@ -42,6 +44,16 @@ namespace DancellApp.ViewModels
             get => image;
             set => SetProperty(ref image, value);
         }
+        public bool IsEnabled
+        {
+            get => isEnabled;
+            set => SetProperty(ref isEnabled, value);
+        }
+        public bool IsRunning
+        {
+            get => isRunning;
+            set => SetProperty(ref isRunning, value);
+        }
         public ICommand PickImageCommand { get; }
         public ICommand EditProfileCommand { get; }
         #endregion
@@ -49,6 +61,8 @@ namespace DancellApp.ViewModels
         #region Attributes
         private Usuario user;
         private ImageModel image;
+        private bool isEnabled;
+        private bool isRunning;
         #endregion
 
         #region Methods
@@ -64,7 +78,7 @@ namespace DancellApp.ViewModels
         }
 
         public async void EditProfile()
-        {
+        {          
             if (string.IsNullOrEmpty(User.Nombre))
             {
                 await Application.Current.MainPage.DisplayAlert(
@@ -97,11 +111,13 @@ namespace DancellApp.ViewModels
                     "Aceptar");
                 return;
             }
+            IsEnabled = false;
+            IsRunning = true;
             var result = await this.userService.EditProfileUser("/Administracion/UpdateUsuario", this.User);
             if (result.Is_Error)
             {
-                //this.IsRunning = false;
-                //this.IsEnabled = true;
+                IsRunning = false;
+                this.IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     result.Msj,
@@ -113,9 +129,10 @@ namespace DancellApp.ViewModels
                    "Exito",
                    result.Msj,
                    "OK");
-            ProfilePage profilePage = new ProfilePage();
-            await App.Navigator.PopAsync();
-            
+            IsEnabled = true;
+            IsRunning = false;
+            Application.Current.MainPage = new MasterPage();
+
         }
         #endregion
     }

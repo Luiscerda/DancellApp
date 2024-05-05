@@ -4,7 +4,8 @@
              xmlns:controls="clr-namespace:DancellApp.Controls"
              xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
              x:Class="DancellApp.Views.EditProfilePage"
-             Title="Editar perfil">
+             Title="Editar perfil"
+             BackgroundColor="#E1EAF9">
     <ContentPage.BindingContext>
         <viewModels:EditProfileViewModels/>
     </ContentPage.BindingContext>
@@ -73,7 +74,7 @@
                         CornerRadius="10"
                         TextColor="#74787E"
                         PlaceholderColor="#647B9D"
-                        Keyboard="Numeric"
+                        Keyboard="Text"
                         Text="{Binding User.Nombre}"
                         TextTransform="Uppercase"/>
                     <controls:CustomEntry
@@ -123,7 +124,8 @@
                         CornerRadius="25"
                         FontSize="18"
                         FontAttributes="Bold"
-                        Command="{Binding EditProfileCommand}">
+                        Command="{Binding EditProfileCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroupList>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -141,6 +143,13 @@
                             </VisualStateGroupList>
                         </VisualStateManager.VisualStateGroups>
                     </Button>
+                </StackLayout>
+                <StackLayout Grid.Row="1" HorizontalOptions="Center">
+                    <ActivityIndicator
+                        IsRunning="{Binding IsRunning, Mode=TwoWay}"
+                        Color="#EE2323">
+                        
+                    </ActivityIndicator>
                 </StackLayout>
             </Grid>
         </VerticalStackLayout>

@@ -19,13 +19,17 @@ namespace DancellApp.ViewModels
         #region Attributes
         private Usuario user;
         private bool isRefreshing;
+        private GeolocationService geolocationService;
         #endregion
 
         #region Constructor
         public ProfileViewModels()
         {
             baseConstants = new DataBaseConstants();
+            geolocationService = new GeolocationService();
             User = baseConstants.GetUserAsync();
+            GetLocationCache();
+            GetCurrentLocation();
         }
         #endregion
 
@@ -47,6 +51,18 @@ namespace DancellApp.ViewModels
         public async void NavEditProfilePage()
         {
             await App.Navigator.PushAsync(new EditProfilePage());
+        }
+
+        public async void GetLocationCache()
+        {
+            var location = await geolocationService.GetCachedLocation();
+            await Application.Current.MainPage.DisplayAlert("Mensaje", $"{location.Message}", "OK");
+        }
+
+        public async void GetCurrentLocation()
+        {
+            var location = await geolocationService.GetCurrentLocation();
+            await Application.Current.MainPage.DisplayAlert("Mensaje", $"{location.Message}", "OK");
         }
         #endregion
     }
