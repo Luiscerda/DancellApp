@@ -21,9 +21,11 @@ namespace DancellApp.ViewModels
         #endregion
 
         #region Services
-        private UserService userService;
-        private DataBaseConstants baseService;
+        private readonly UserService userService;
+        private readonly DataBaseConstants baseService;
+        private readonly ConnectivityService connectivityService;
         #endregion
+
         #region Constructor
         public LoginScreenViewModels()
         {
@@ -33,6 +35,7 @@ namespace DancellApp.ViewModels
             LoginCommand = new AsyncRelayCommand(GetByUserAndPassword);
             userService = new UserService();
             baseService = new DataBaseConstants();
+            connectivityService = new ConnectivityService();
         }
         #endregion
 
@@ -73,6 +76,17 @@ namespace DancellApp.ViewModels
                     "Error",
                     "Por favor ingrese una contraseña",
                     "Aceptar");
+                return;
+            }
+            var connectivity = connectivityService.CheckConnectivity();
+            if (!connectivity.IsSuccess)
+            {
+                //IsRunning = false;
+                //IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    connectivity.Message,
+                    "OK");
                 return;
             }
             var result = await this.userService.GetByUserAndPassword("/Public/Login", this.UserName, this.Password);

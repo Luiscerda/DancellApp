@@ -28,8 +28,8 @@ namespace DancellApp.ViewModels
             baseConstants = new DataBaseConstants();
             geolocationService = new GeolocationService();
             User = baseConstants.GetUserAsync();
-            GetLocationCache();
-            GetCurrentLocation();
+            //GetLocationCache();
+            //GetCurrentLocation();
         }
         #endregion
 

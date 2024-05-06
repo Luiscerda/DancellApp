@@ -101,12 +101,21 @@ namespace DancellApp.ViewModels
                 Icon = "home", 
                 Name = "INICIO",
                 TargetType = typeof(HomePage),
+                IsActive = false,
             });
             menu.Add(new MenuItemModel
             {
                 Icon = "user",
                 Name = "PERFIL",
-                TargetType = typeof(ProfilePage)
+                TargetType = typeof(ProfilePage),
+                IsActive = false,
+            });
+            menu.Add(new MenuItemModel
+            {
+                Icon = "simcard",
+                Name = "SOLICITAR PRODUCTOS",
+                TargetType = typeof(ProfilePage),
+                IsActive = false,
             });
 
             MenuItems = new ObservableCollection<MenuItemModel>(menu);
@@ -114,15 +123,47 @@ namespace DancellApp.ViewModels
 
         public async void SelectNavPage(MenuItemModel menuItem)
         {
+            var ind = App.Master.Title;
             switch(menuItem.Name)
             {
                 case "INICIO":
-                    App.Master.IsPresented = false;
-                    await App.Navigator.PopAsync();
+                    if (!menuItem.IsActive)
+                    {
+                        App.Master.IsPresented = false;
+                        await App.Navigator.PopAsync();
+                        menuItem.IsActive = true;
+                        foreach (var item in MenuItems)
+                        {
+                            if (item.Name != menuItem.Name)
+                            {
+                                item.IsActive = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        App.Master.IsPresented = false;
+                    }
+                    
                     break;
                 case "PERFIL":
-                    App.Master.IsPresented = false;
-                    await App.Navigator.PushAsync(new ProfilePage());                  
+                    if (!menuItem.IsActive)
+                    {
+                        App.Master.IsPresented = false;
+                        await App.Navigator.PushAsync(new ProfilePage());
+                        menuItem.IsActive = true;
+                        foreach (var item in MenuItems)
+                        {
+                            if (item.Name != menuItem.Name)
+                            {
+                                item.IsActive = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        App.Master.IsPresented = false;
+                    }                               
                     break;
             }
         }

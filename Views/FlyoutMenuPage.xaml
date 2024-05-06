@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:DancellApp.Controls"
              Title="FlyoutMenuPage"
              BackgroundColor="#D4D7DB">
+    <ContentPage.BindingContext>
+        <viewModels:FlyoutMenuViewModels/>
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Style TargetType="SwipeView">
             <Setter Property="VisualStateManager.VisualStateGroups">

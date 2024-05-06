@@ -14,8 +14,9 @@ namespace DancellApp.ViewModels
     {
         #region Services
         private readonly DataBaseConstants baseConstants;
-        private LoadImageService loadImageService;
-        private UserService userService;
+        private readonly LoadImageService loadImageService;
+        private readonly UserService userService;
+        private readonly ConnectivityService connectivityService;
         #endregion
 
         #region Constructor
@@ -24,6 +25,7 @@ namespace DancellApp.ViewModels
             baseConstants = new DataBaseConstants();
             loadImageService = new LoadImageService();
             userService = new UserService();
+            connectivityService = new ConnectivityService();
             User = baseConstants.GetUserAsync();
             PickImageCommand = new Command(() => DoPickImage());
             EditProfileCommand = new Command(() => EditProfile());
@@ -113,11 +115,22 @@ namespace DancellApp.ViewModels
             }
             IsEnabled = false;
             IsRunning = true;
+            var connectivity = connectivityService.CheckConnectivity();
+            if (!connectivity.IsSuccess)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await Application.Current.MainPage.DisplayAlert(
+                    "Error",
+                    connectivity.Message,
+                    "OK");
+                return;
+            }
             var result = await this.userService.EditProfileUser("/Administracion/UpdateUsuario", this.User);
             if (result.Is_Error)
             {
                 IsRunning = false;
-                this.IsEnabled = true;
+                IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
                     result.Msj,
