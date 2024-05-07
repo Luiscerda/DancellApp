@@ -33,88 +33,91 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-    <VerticalStackLayout VerticalOptions="Start" Spacing="5">
-        <Border WidthRequest="140"
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="Start" Spacing="5">
+            <Border WidthRequest="140"
                 HeightRequest="140"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 50"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 Margin="0,10">
-            <Border.Shadow>
-                <Shadow
-                    Brush="#E1EAF9"
-                    Offset="10,10"
-                    Opacity=".8"
+                <Border.Shadow>
+                    <Shadow
+                        Brush="#E1EAF9"
+                        Offset="10,10"
+                        Opacity=".8"
                     />
-            </Border.Shadow>
-            <Image
-                Source="avatar_user"
-                Aspect="Fill"/>
-            <!--<Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding PickImageCommand}"/>
-            </Border.GestureRecognizers>-->
-        </Border>
-        <Label 
-            TextColor="#647B9D"
-            Text="{Binding NameProfile, Mode=TwoWay}"
-            FontSize="20"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"/>
-        <Label 
-            TextColor="#647B9D"
-            Text="{Binding User.DesRol}"
-            FontSize="15"
-            HorizontalTextAlignment="Center"
-            FontAttributes="Bold"/>
-        <BoxView
-            Color="#E1EAF9"
-            HeightRequest="1"
-            HorizontalOptions="FillAndExpand"
-            StyleClass="Separator"/>
-        <CollectionView ItemsSource="{Binding MenuItems}" SelectionMode="Single" x:Name="collectionView" x:FieldModifier="public">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <SwipeView>
-                        <SwipeView.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.SelectNavPageCommand}" CommandParameter="{Binding}"/>
-                        </SwipeView.GestureRecognizers>
-                        <Grid Padding="5" ColumnSpacing="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                Grid.Column="0"
-                                StrokeShape="RoundRectangle 50"
-                                StrokeThickness="1"
-                                HeightRequest="50"
-                                WidthRequest="50">
-                                <Border.Shadow>
-                                    <Shadow
-                                        Brush="#E1EAF9"
-                                        Offset="10,10"
-                                        Opacity=".8"/>
-                                </Border.Shadow>
-                                <Image
-                                    Source="{Binding Icon}"
-                                    HeightRequest="40"
-                                    WidthRequest="40"/>
-                            </Border>
-                            <Label
-                                VerticalTextAlignment="Center"
-                                Text="{Binding Name}"
-                                TextColor="#53565A"
-                                Grid.Column="1"/>
-                        </Grid>
-                    </SwipeView>
-                    
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                </Border.Shadow>
+                <Image
+                    Source="avatar_user"
+                    Aspect="Fill"
+                />
+                <!--<Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PickImageCommand}"/>
+                </Border.GestureRecognizers>-->
+            </Border>
+            <Label 
+                TextColor="#647B9D"
+                Text="{Binding NameProfile, Mode=TwoWay}"
+                FontSize="20"
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+            />
+            <Label 
+                TextColor="#647B9D"
+                Text="{Binding User.DesRol}"
+                FontSize="15"
+                HorizontalTextAlignment="Center"
+                FontAttributes="Bold"
+            />
+            <BoxView
+                Color="#E1EAF9"
+                HeightRequest="1"
+                HorizontalOptions="FillAndExpand"
+                StyleClass="Separator"
+            />
+            <CollectionView ItemsSource="{Binding MenuItems}" SelectionMode="Single" x:Name="collectionView" x:FieldModifier="public">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.SelectNavPageCommand}" CommandParameter="{Binding}"/>
+                            </SwipeView.GestureRecognizers>
+                            <Grid Padding="5" ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Grid.Column="0"
+                                    StrokeShape="RoundRectangle 50"
+                                    StrokeThickness="1"
+                                    HeightRequest="50"
+                                    WidthRequest="50">
+                                    <Image
+                                        Source="{Binding Icon}"
+                                        HeightRequest="40"
+                                        WidthRequest="38"
+                                    />
+                                </Border>
+                                <Label
+                                    VerticalTextAlignment="Center"
+                                    Text="{Binding Name}"
+                                    TextColor="#53565A"
+                                    Grid.Column="1"
+                                />
+                            </Grid>
+                        </SwipeView>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+    
 </ContentPage>

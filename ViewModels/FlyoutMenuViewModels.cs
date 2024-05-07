@@ -112,6 +112,13 @@ namespace DancellApp.ViewModels
             });
             menu.Add(new MenuItemModel
             {
+                Icon = "comition",
+                Name = "GESTIONAR COMISIÓN",
+                TargetType = typeof(ComitionPage),
+                IsActive = false,
+            });
+            menu.Add(new MenuItemModel
+            {
                 Icon = "simcard",
                 Name = "SOLICITAR PRODUCTOS",
                 TargetType = typeof(ProfilePage),
@@ -123,7 +130,6 @@ namespace DancellApp.ViewModels
 
         public async void SelectNavPage(MenuItemModel menuItem)
         {
-            var ind = App.Master.Title;
             switch(menuItem.Name)
             {
                 case "INICIO":
@@ -164,6 +170,25 @@ namespace DancellApp.ViewModels
                     {
                         App.Master.IsPresented = false;
                     }                               
+                    break;
+                case "GESTIONAR COMISIÓN":
+                    if (!menuItem.IsActive)
+                    {
+                        App.Master.IsPresented = false;
+                        await App.Navigator.PushAsync(new ComitionPage());
+                        menuItem.IsActive = true;
+                        foreach (var item in MenuItems)
+                        {
+                            if (item.Name != menuItem.Name)
+                            {
+                                item.IsActive = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        App.Master.IsPresented = false;
+                    }
                     break;
             }
         }
