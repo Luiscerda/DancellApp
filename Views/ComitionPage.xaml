@@ -2,11 +2,78 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DancellApp.Views.ComitionPage"
-             Title="ComitionPage"
+             xmlns:controls="clr-namespace:DancellApp.Controls"
+             xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
+             Title="Gestion de comisiones"
              BackgroundColor="#E1EAF9">
+    <ContentPage.BindingContext>
+        <viewModels:ComitionViewModels/>
+    </ContentPage.BindingContext>
     <ScrollView>
         <VerticalStackLayout>
-            
+            <Grid VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Margin="0,30" HorizontalOptions="CenterAndExpand">
+                    <Label
+                        FontSize="20"
+                        TextColor="#53565A"
+                        Text="Digite el IDPOS para gestionar la comisión."
+                        HorizontalTextAlignment="Center"
+                    />
+                </StackLayout>
+                <HorizontalStackLayout Grid.Row="1" Spacing="300" HorizontalOptions="CenterAndExpand">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:CustomEntry
+                            Grid.Column="0"
+                            BorderColor="#D4D7D8"
+                            BorderThickness="2"
+                            CornerRadius="10"
+                            HeightRequest="55"
+                            Keyboard="Numeric"
+                            FontSize="15"
+                            Placeholder="IdPos"
+                            PlaceholderColor="#647B9D"
+                            TextColor="#74787E"
+                            Text="{Binding IdPos, Mode=TwoWay}"
+                            HorizontalTextAlignment="Center"
+                            WidthRequest="300"
+                        />
+                        <ImageButton
+                            Command="{Binding GetComitionByIdPosCommand}"
+                            Grid.Column="1"
+                            IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                            Source="search">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="Scale" Value="0.8" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                    </Grid>
+                </HorizontalStackLayout>
+            </Grid>
         </VerticalStackLayout>
     </ScrollView>
     

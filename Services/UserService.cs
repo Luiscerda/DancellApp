@@ -9,7 +9,7 @@ namespace DancellApp.Services
 {
     public class UserService
     {
-        string urlBase = Application.Current.Resources["UrlBase"].ToString();
+        readonly string urlBase = Application.Current.Resources["UrlBase"].ToString();
 
         public async Task<IAjaxResult> GetByUserAndPassword(string controller ,string userName, string password)
         {
@@ -51,7 +51,7 @@ namespace DancellApp.Services
 
         public async Task<IAjaxResult> EditProfileUser(string controller, Usuario usuario)
         {
-            IAjaxResult resultAjax = new IAjaxResult();
+            IAjaxResult resultAjax = new();
             try
             {
                 var request = JsonConvert.SerializeObject(usuario);
