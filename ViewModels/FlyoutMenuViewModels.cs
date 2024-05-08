@@ -37,7 +37,7 @@ namespace DancellApp.ViewModels
 
         #region Attributes
         private Usuario user;
-        readonly IList<MenuItemModel> menu;
+        private readonly List<MenuItemModel> menu;
         private string text;
         private string nameProfile;
         MenuItemModel selectedItem;

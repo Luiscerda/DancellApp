@@ -9,10 +9,35 @@
     <ContentPage.BindingContext>
         <viewModels:ComitionViewModels/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="SwipeView">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                        Value="Red" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                        Value="#E1EAF9" />
+                                <Setter Property="Margin" 
+                                        Value="20,0" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
     <ScrollView>
         <VerticalStackLayout>
             <Grid VerticalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -24,7 +49,7 @@
                         HorizontalTextAlignment="Center"
                     />
                 </StackLayout>
-                <HorizontalStackLayout Grid.Row="1" Spacing="300" HorizontalOptions="CenterAndExpand">
+                <HorizontalStackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -73,6 +98,42 @@
                         </ImageButton>
                     </Grid>
                 </HorizontalStackLayout>
+                <CollectionView Grid.Row="2" 
+                                BackgroundColor="Cornsilk"
+                                Margin="0,30" 
+                                ItemsSource="{Binding Comitions}" 
+                                SelectionMode="Single" 
+                                x:Name="comitionsView" 
+                                x:FieldModifier="public">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <Grid BackgroundColor="DarkBlue">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="0"
+                                        Text="{Binding Descripcion}"
+                                        TextColor="#53565A"
+                                        VerticalTextAlignment="Center"
+                                    />
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding ValorComision}"
+                                        TextColor="#53565A"
+                                        VerticalTextAlignment="Center"
+                                    />
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

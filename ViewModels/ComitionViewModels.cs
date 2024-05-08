@@ -1,6 +1,7 @@
 ﻿using DancellApp.Models;
 using DancellApp.Services;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DancellApp.ViewModels
@@ -19,13 +20,15 @@ namespace DancellApp.ViewModels
             comitionService = new ComitionService();
             connectivityService = new ConnectivityService();
             baseConstants = new DataBaseConstants();
+            comitions = new List<ComitionModel>();
             IsEnabled = true;
-            GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos());
+            GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos(GetComitions()));
         }
         #endregion
 
         #region Attributes
         private string idPos;
+        readonly List<ComitionModel> comitions;
         private bool isEnabled;
         #endregion
 
@@ -41,10 +44,16 @@ namespace DancellApp.ViewModels
             set => SetValue(ref isEnabled, value);
         }
         public ICommand GetComitionByIdPosCommand { get; }
+        public ObservableCollection<ComitionModel> Comitions { get; private set; }
+
+        public List<ComitionModel> GetComitions()
+        {
+            return comitions;
+        }
         #endregion
 
         #region Methods
-        public async void GetComitionByIdPos()
+        public async void GetComitionByIdPos(List<ComitionModel> comitions)
         {
             if (string.IsNullOrEmpty(IdPos))
             {
@@ -78,8 +87,8 @@ namespace DancellApp.ViewModels
                     "OK");
                 return;
             }
-            var comitions = JsonConvert.DeserializeObject<List<ComitionModel>>(result.Objeto.ToString());
-            if (comitions.Count == 0)
+            var _comitions = JsonConvert.DeserializeObject<List<ComitionModel>>(result.Objeto.ToString());
+            if (_comitions.Count == 0)
             {
                 //IsRunning = false;
                 IsEnabled = true;
@@ -89,10 +98,16 @@ namespace DancellApp.ViewModels
                     "OK");
                 return;
             }
-            foreach (var item in comitions)
+            foreach (var item in _comitions)
             {
-
+                if (item.Vigente.ToUpper().Trim() == "SI")
+                {
+                    this.comitions.Add(item);
+                }
             }
+
+            Comitions = new ObservableCollection<ComitionModel>(list: this.comitions);
+
         }
         #endregion
     }
