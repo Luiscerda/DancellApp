@@ -100,12 +100,20 @@
                         </ImageButton>
                     </Grid>
                 </HorizontalStackLayout>
-                <StackLayout Grid.Row="3" Margin="0,30">
-                    <CollectionView ItemsSource="{Binding Comitions}" SelectionMode="Single">
+                <StackLayout Grid.Row="3" Margin="0,30" IsVisible="{Binding IsVisible,Mode=TwoWay}">
+                    <Label
+                        FontSize="20"
+                        Text="Seleccione la comisión a gestionar"
+                        TextColor="#53565A"
+                        HorizontalTextAlignment="Center"/>
+                    <CollectionView ItemsSource="{Binding Comitions}" SelectionMode="Single" Margin="0,10" x:Name="collectionComitions">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <SwipeView>
                                     <Frame CornerRadius="20" HasShadow="True" Margin="10,5" BackgroundColor="#D4D7DB">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference collectionComitions}, Path=BindingContext.SelectComitionCommand}" CommandParameter="{Binding}"/>
+                                        </Frame.GestureRecognizers>
                                         <Grid ColumnSpacing="15">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto" />
@@ -139,6 +147,90 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
+                </StackLayout>
+                <StackLayout Grid.Row="3" Margin="20,30" IsVisible="{Binding IsVisibleType, Mode=TwoWay}">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="Subtitle"
+                        Text="Por favor escribe en una casilla o en varias los valores para la gestión de la comision."
+                        TextColor="#53565A"/>
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            FontAttributes="Italic,Bold"
+                            Grid.Column="0"
+                            Margin="0,20"
+                            Text="Comision restante"
+                            TextColor="#53565A"
+                            WidthRequest="120"/>
+                        <Label
+                            FontAttributes="Italic,Bold"
+                            Grid.Column="1"
+                            Margin="0,20"
+                            Text="{Binding ValorRestante, Mode=TwoWay}"
+                            TextColor="#53565A"
+                            WidthRequest="100"/>
+                    </Grid>
+                    <StackLayout HorizontalOptions="Start">
+                        <Label
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            Text="Efectivo"
+                            TextColor="#74787E"
+                        />
+                        <controls:CustomEntry
+                            BorderColor="#D4D7D8"
+                            BorderThickness="2"
+                            CornerRadius="10"
+                            HeightRequest="55"
+                            WidthRequest="300"
+                            Keyboard="Numeric"
+                            HorizontalTextAlignment="Center"
+                            PlaceholderColor="#647B9D"
+                            TextColor="#74787E"
+                        />
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="Start" Margin="0,30">
+                        <Label
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            Text="SimCard"
+                            TextColor="#74787E"
+                        />
+                        <controls:CustomEntry
+                            BorderColor="#D4D7D8"
+                            BorderThickness="2"
+                            CornerRadius="10"
+                            HeightRequest="55"
+                            WidthRequest="300"
+                            Keyboard="Numeric"
+                            HorizontalTextAlignment="Center"
+                            PlaceholderColor="#647B9D"
+                            TextColor="#74787E"
+                        />
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="Start" Margin="0,30">
+                        <Label
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            Text="Recarga"
+                            TextColor="#74787E"
+                        />
+                        <controls:CustomEntry
+                            BorderColor="#D4D7D8"
+                            BorderThickness="2"
+                            CornerRadius="10"
+                            HeightRequest="55"
+                            WidthRequest="300"
+                            Keyboard="Numeric"
+                            HorizontalTextAlignment="Center"
+                            PlaceholderColor="#647B9D"
+                            TextColor="#74787E"
+                        />
+                    </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Row="4" HorizontalOptions="Center">
                     <ActivityIndicator
