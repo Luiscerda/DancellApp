@@ -2,6 +2,7 @@
 using DancellApp.Services;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows.Input;
 
 namespace DancellApp.ViewModels
@@ -20,16 +21,18 @@ namespace DancellApp.ViewModels
             comitionService = new ComitionService();
             connectivityService = new ConnectivityService();
             baseConstants = new DataBaseConstants();
-            comitions = new List<ComitionModel>();
+            Comitions = new ObservableCollection<ComitionModel>();
             IsEnabled = true;
-            GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos(GetComitions()));
+            IsRunning = false;
+            GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos());
         }
         #endregion
 
         #region Attributes
         private string idPos;
-        readonly List<ComitionModel> comitions;
+        private ObservableCollection<ComitionModel> comitions;
         private bool isEnabled;
+        private bool isRunning;
         #endregion
 
         #region Properties
@@ -44,16 +47,22 @@ namespace DancellApp.ViewModels
             set => SetValue(ref isEnabled, value);
         }
         public ICommand GetComitionByIdPosCommand { get; }
-        public ObservableCollection<ComitionModel> Comitions { get; private set; }
-
-        public List<ComitionModel> GetComitions()
+        public ObservableCollection<ComitionModel> Comitions
         {
-            return comitions;
+            get => comitions;
+            set => SetValue(ref comitions, value);
         }
+
+        public bool IsRunning
+        {
+            get => isRunning;
+            set => SetValue(ref isRunning, value);
+        }
+
         #endregion
 
         #region Methods
-        public async void GetComitionByIdPos(List<ComitionModel> comitions)
+        public async void GetComitionByIdPos()
         {
             if (string.IsNullOrEmpty(IdPos))
             {
@@ -64,10 +73,11 @@ namespace DancellApp.ViewModels
                 return;
             }
             IsEnabled = false;
+            IsRunning = true;
             var connectivity = connectivityService.CheckConnectivity();
             if (!connectivity.IsSuccess)
             {
-                //IsRunning = false;
+                IsRunning = false;
                 IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
@@ -79,7 +89,7 @@ namespace DancellApp.ViewModels
             var result = await this.comitionService.GetComitionByIdPos("/Liquidaciones/GetGestionPrepago", user.UserName, user.Password, IdPos);
             if (result.Is_Error)
             {
-                //IsRunning = false;
+                IsRunning = false;
                 IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
@@ -90,7 +100,7 @@ namespace DancellApp.ViewModels
             var _comitions = JsonConvert.DeserializeObject<List<ComitionModel>>(result.Objeto.ToString());
             if (_comitions.Count == 0)
             {
-                //IsRunning = false;
+                IsRunning = false;
                 IsEnabled = true;
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
@@ -102,12 +112,14 @@ namespace DancellApp.ViewModels
             {
                 if (item.Vigente.ToUpper().Trim() == "SI")
                 {
+                    item.Valor = item.ValorComision.ToString("C0", CultureInfo.CurrentCulture);
                     this.comitions.Add(item);
                 }
             }
 
-            Comitions = new ObservableCollection<ComitionModel>(list: this.comitions);
-
+            Comitions = this.comitions;
+            IsEnabled = true;
+            IsRunning = false;
         }
         #endregion
     }

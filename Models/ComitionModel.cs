@@ -14,5 +14,6 @@ namespace DancellApp.Models
         public decimal ValorComisionRestante { get; set; }
         public string IdPos { get; set; }
         public string Descripcion { get; set; }
+        public string Valor { get; set; }
     }
 }

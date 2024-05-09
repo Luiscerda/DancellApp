@@ -17,15 +17,15 @@
                         <VisualState x:Name="Normal">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" 
-                                        Value="Red" />
+                                        Value="Transparent" />
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor" 
-                                        Value="#E1EAF9" />
+                                        Value="#647B9D" />
                                 <Setter Property="Margin" 
-                                        Value="20,0" />
+                                        Value="5" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -37,6 +37,8 @@
         <VerticalStackLayout>
             <Grid VerticalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -98,42 +100,53 @@
                         </ImageButton>
                     </Grid>
                 </HorizontalStackLayout>
-                <CollectionView Grid.Row="2" 
-                                BackgroundColor="Cornsilk"
-                                Margin="0,30" 
-                                ItemsSource="{Binding Comitions}" 
-                                SelectionMode="Single" 
-                                x:Name="comitionsView" 
-                                x:FieldModifier="public">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <SwipeView>
-                                <Grid BackgroundColor="DarkBlue">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label
-                                        Grid.Column="0"
-                                        Text="{Binding Descripcion}"
-                                        TextColor="#53565A"
-                                        VerticalTextAlignment="Center"
-                                    />
-                                    <Label
-                                        Grid.Column="1"
-                                        Text="{Binding ValorComision}"
-                                        TextColor="#53565A"
-                                        VerticalTextAlignment="Center"
-                                    />
-                                </Grid>
-                            </SwipeView>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                <StackLayout Grid.Row="3" Margin="0,30">
+                    <CollectionView ItemsSource="{Binding Comitions}" SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <SwipeView>
+                                    <Frame CornerRadius="20" HasShadow="True" Margin="10,5" BackgroundColor="#D4D7DB">
+                                        <Grid ColumnSpacing="15">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label
+                                                FontSize="15"
+                                                Grid.Column="0"
+                                                Text="{Binding Descripcion}"
+                                                TextColor="#53565A"
+                                                HorizontalOptions="Start"
+                                                HorizontalTextAlignment="Start"                                               
+                                            />
+                                            <Label
+                                                FontSize="15"
+                                                Grid.Column="1"
+                                                Text="{Binding Valor}"
+                                                FontAttributes="Bold"
+                                                TextColor="#53565A"
+                                                VerticalTextAlignment="End"
+                                                HorizontalTextAlignment="End"
+                                                HorizontalOptions="End"
+                                            />
+                                        </Grid>
+                                    </Frame>
+                                </SwipeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                <StackLayout Grid.Row="4" HorizontalOptions="Center">
+                    <ActivityIndicator
+                        IsRunning="{Binding IsRunning, Mode=TwoWay}"
+                        Color="#EE2323">
+
+                    </ActivityIndicator>
+                </StackLayout>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

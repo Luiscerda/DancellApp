@@ -45,11 +45,12 @@ public partial class App : Microsoft.Maui.Controls.Application
         services.AddTransient<EditProfileViewModels>();
         services.AddTransient<ProfileViewModels>();
         services.AddTransient<DataBaseConstants>();
-        services.AddTransient<LoginScreenPage>();
+        services.AddTransient<ComitionViewModels>();
 
         services.AddSingleton<LoginScreenPage>();
         services.AddSingleton<EditProfilePage>();
         services.AddSingleton<ProfilePage>();
+        services.AddSingleton<ComitionPage>();
         services.AddSingleton<FlyoutMenuPage>();
 
         return services.BuildServiceProvider();
