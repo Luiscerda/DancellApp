@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DancellApp.ViewModels
 {
@@ -38,6 +39,8 @@ namespace DancellApp.ViewModels
         private bool isRunning;
         private bool isVisible;
         private bool isVisibleType;
+        private string efectivo;
+        private int cursorPosition;
         #endregion
 
         #region Properties
@@ -76,6 +79,56 @@ namespace DancellApp.ViewModels
         {
             get => isRunning;
             set => SetValue(ref isRunning, value);
+
+        }
+        public int CursorPosition
+        {
+            get => cursorPosition;
+            set
+            {
+                if (cursorPosition != value)
+                {
+                    cursorPosition = value;
+                    OnPropertyChanged(nameof(CursorPosition));
+                }
+            }
+
+        }
+        public string Efectivo
+        {
+            get => efectivo;
+            set
+            {
+                if (efectivo != value)
+                {
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        if (value.Length > 3)
+                        {
+                            value = value.Contains('$') ? value.Replace("$", "").Replace(",", "") : value;
+                            if (value != "")
+                            {
+                                efectivo = Convert.ToDecimal(value).ToString("C0", CultureInfo.CurrentCulture);
+                                CursorPosition = efectivo.Length + 1;
+                            }
+                            else
+                            {
+                                efectivo = "";
+                            }
+                        }
+                        else
+                        {
+                            efectivo = value;
+                        }
+
+                        OnPropertyChanged();
+                    }
+                }
+                
+                
+                
+               
+            }
         }
         public ICommand SelectComitionCommand => new Command<ComitionModel>(ViewTypeComitions);
         #endregion
@@ -147,6 +200,11 @@ namespace DancellApp.ViewModels
             IsVisible = false;
             IsVisibleType = true;
             ValorRestante = comition.Valor;
+        }
+
+        public void ConvertMoney(decimal value)
+        {
+            Efectivo = value.ToString("C0", CultureInfo.CurrentCulture);
         }
         #endregion
     }

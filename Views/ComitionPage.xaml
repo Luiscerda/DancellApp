@@ -191,6 +191,8 @@
                             HorizontalTextAlignment="Center"
                             PlaceholderColor="#647B9D"
                             TextColor="#74787E"
+                            Text="{Binding Efectivo, Mode=TwoWay}"
+                            CursorPosition="{Binding CursorPosition}"
                         />
                     </StackLayout>
                     <StackLayout HorizontalOptions="Start" Margin="0,30">
