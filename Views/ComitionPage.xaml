@@ -172,7 +172,8 @@
                             Margin="0,20"
                             Text="{Binding ValorRestante, Mode=TwoWay}"
                             TextColor="#53565A"
-                            WidthRequest="100"/>
+                            WidthRequest="100"
+                            x:Name="labelRestante"/>
                     </Grid>
                     <StackLayout HorizontalOptions="Start">
                         <Label
@@ -191,9 +192,9 @@
                             HorizontalTextAlignment="Center"
                             PlaceholderColor="#647B9D"
                             TextColor="#74787E"
-                            Text="{Binding Efectivo, Mode=TwoWay}"
-                            CursorPosition="{Binding CursorPosition}"
-                        />
+                            x:Name="entryEfectivo"
+                        >
+                        </controls:CustomEntry>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Start" Margin="0,30">
                         <Label

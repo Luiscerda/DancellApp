@@ -28,7 +28,8 @@ namespace DancellApp.ViewModels
             IsVisible = false;
             IsVisibleType = false;
             GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos());
-        }
+            EntryCompletedCommand = new Command(OnEntryCompleted);
+        } 
         #endregion
 
         #region Attributes
@@ -89,6 +90,7 @@ namespace DancellApp.ViewModels
                 if (cursorPosition != value)
                 {
                     cursorPosition = value;
+                    cursorPosition = Efectivo.Length;
                     OnPropertyChanged(nameof(CursorPosition));
                 }
             }
@@ -101,7 +103,7 @@ namespace DancellApp.ViewModels
             {
                 if (efectivo != value)
                 {
-                    if (!string.IsNullOrEmpty(value))
+                    if (!string.IsNullOrEmpty(value) && efectivo != value)
                     {
                         if (value.Length > 3)
                         {
@@ -109,7 +111,7 @@ namespace DancellApp.ViewModels
                             if (value != "")
                             {
                                 efectivo = Convert.ToDecimal(value).ToString("C0", CultureInfo.CurrentCulture);
-                                CursorPosition = efectivo.Length + 1;
+                                
                             }
                             else
                             {
@@ -131,6 +133,7 @@ namespace DancellApp.ViewModels
             }
         }
         public ICommand SelectComitionCommand => new Command<ComitionModel>(ViewTypeComitions);
+        public ICommand EntryCompletedCommand { get; private set; }
         #endregion
 
         #region Methods
@@ -202,9 +205,14 @@ namespace DancellApp.ViewModels
             ValorRestante = comition.Valor;
         }
 
-        public void ConvertMoney(decimal value)
+        public string ConvertMoney(decimal value)
         {
-            Efectivo = value.ToString("C0", CultureInfo.CurrentCulture);
+            return value.ToString("C0", CultureInfo.CurrentCulture);
+        }
+        private void OnEntryCompleted()
+        {
+
+            Efectivo = ConvertMoney(Convert.ToDecimal(Efectivo));
         }
         #endregion
     }

@@ -43,6 +43,7 @@ namespace DancellApp.ViewModels
         MenuItemModel selectedItem;
         private ImageSource image;
         private bool isImageVisible;
+        private bool isMenuVisible;
         #endregion
 
         #region Propperties
@@ -71,6 +72,11 @@ namespace DancellApp.ViewModels
             get => isImageVisible;
             set => SetProperty(ref isImageVisible, value);
         }
+        public bool IsMenuVisible
+        {
+            get => isMenuVisible;
+            set => SetProperty(ref isMenuVisible, value);
+        }
         public MenuItemModel SelectedItem
         {
             get
@@ -85,7 +91,7 @@ namespace DancellApp.ViewModels
                 }
             }
         }
-
+        MainPage RootPage { get => App.Current.MainPage as MainPage; }
         public ICommand SelectNavPageCommand => new Command<MenuItemModel>(SelectNavPage);
         public ICommand PickImageCommand { get; }
         public ObservableCollection<MenuItemModel> MenuItems { get; private set; }
@@ -130,65 +136,24 @@ namespace DancellApp.ViewModels
 
         public async void SelectNavPage(MenuItemModel menuItem)
         {
-            switch(menuItem.Name)
+            await MenuItem(menuItem);
+        }
+
+        private async Task MenuItem(MenuItemModel menuItem)
+        {
+            switch (menuItem.Name)
             {
                 case "INICIO":
-                    if (!menuItem.IsActive)
-                    {
-                        App.Master.IsPresented = false;
-                        await App.Navigator.PopAsync();
-                        menuItem.IsActive = true;
-                        foreach (var item in MenuItems)
-                        {
-                            if (item.Name != menuItem.Name)
-                            {
-                                item.IsActive = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        App.Master.IsPresented = false;
-                    }
-                    
+                    App.Master.IsPresented = false;
+                    await App.Navigator.PopAsync();
                     break;
                 case "PERFIL":
-                    if (!menuItem.IsActive)
-                    {
-                        App.Master.IsPresented = false;
-                        await App.Navigator.PushAsync(new ProfilePage());
-                        menuItem.IsActive = true;
-                        foreach (var item in MenuItems)
-                        {
-                            if (item.Name != menuItem.Name)
-                            {
-                                item.IsActive = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        App.Master.IsPresented = false;
-                    }                               
+                    App.Master.IsPresented = false;
+                    await App.Navigator.PushAsync(new ProfilePage());
                     break;
                 case "GESTIONAR COMISIÓN":
-                    if (!menuItem.IsActive)
-                    {
-                        App.Master.IsPresented = false;
-                        await App.Navigator.PushAsync(new ComitionPage());
-                        menuItem.IsActive = true;
-                        foreach (var item in MenuItems)
-                        {
-                            if (item.Name != menuItem.Name)
-                            {
-                                item.IsActive = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        App.Master.IsPresented = false;
-                    }
+                    App.Master.IsPresented = false;
+                    await App.Navigator.PushAsync(new ComitionPage());
                     break;
             }
         }
