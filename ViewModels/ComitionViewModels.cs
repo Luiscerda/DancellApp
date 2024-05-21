@@ -28,7 +28,8 @@ namespace DancellApp.ViewModels
             IsVisible = false;
             IsVisibleType = false;
             GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos());
-            EntryCompletedCommand = new Command(OnEntryCompleted);
+            MyEntry.Completed += EntryCompleted;
+            //EntryCompletedCommand = new Command(OnEntryCompleted);
         } 
         #endregion
 
@@ -132,8 +133,8 @@ namespace DancellApp.ViewModels
                
             }
         }
+        public Entry MyEntry { get; } = new Entry();
         public ICommand SelectComitionCommand => new Command<ComitionModel>(ViewTypeComitions);
-        public ICommand EntryCompletedCommand { get; private set; }
         #endregion
 
         #region Methods
@@ -209,10 +210,11 @@ namespace DancellApp.ViewModels
         {
             return value.ToString("C0", CultureInfo.CurrentCulture);
         }
-        private void OnEntryCompleted()
+        private void EntryCompleted(object sender, EventArgs e)
         {
-
-            Efectivo = ConvertMoney(Convert.ToDecimal(Efectivo));
+            // Acciones a realizar cuando se completa la entrada
+            var enteredText = MyEntry.Text;
+            // Por ejemplo, procesar el texto ingresado
         }
         #endregion
     }

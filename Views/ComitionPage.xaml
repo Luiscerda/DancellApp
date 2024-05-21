@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DancellApp.Views.ComitionPage"
              xmlns:controls="clr-namespace:DancellApp.Controls"
+             xmlns:local="clr-namespace:DancellApp.Controls"
              xmlns:viewModels="clr-namespace:DancellApp.ViewModels"
              Title="Gestion de comisiones"
              BackgroundColor="#E1EAF9">
@@ -192,8 +193,12 @@
                             HorizontalTextAlignment="Center"
                             PlaceholderColor="#647B9D"
                             TextColor="#74787E"
-                            x:Name="entryEfectivo"
+                            Text="{Binding MyEntry.Text}"
+
                         >
+                            <controls:CustomEntry.Behaviors>
+                                <local:EntryCompletedBehavior/>
+                            </controls:CustomEntry.Behaviors>
                         </controls:CustomEntry>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Start" Margin="0,30">
@@ -232,6 +237,7 @@
                             HorizontalTextAlignment="Center"
                             PlaceholderColor="#647B9D"
                             TextColor="#74787E"
+                            
                         />
                     </StackLayout>
                 </StackLayout>

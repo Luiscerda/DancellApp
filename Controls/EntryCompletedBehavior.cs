@@ -9,31 +9,23 @@ namespace DancellApp.Controls
 {
     public sealed class EntryCompletedBehavior : Behavior<Entry>
     {
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(EntryCompletedBehavior), null);
-
-        public ICommand Command
+        protected override void OnAttachedTo(Entry entry)
         {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
+            base.OnAttachedTo(entry);
+            entry.TextChanged += OnEntryTextChanged;
         }
 
-        protected override void OnAttachedTo(Entry bindable)
+        protected override void OnDetachingFrom(Entry entry)
         {
-            base.OnAttachedTo(bindable);
-            bindable.Completed += OnEntryCompleted;
+            base.OnDetachingFrom(entry);
+            entry.TextChanged -= OnEntryTextChanged;
         }
 
-        protected override void OnDetachingFrom(Entry bindable)
+        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
-            base.OnDetachingFrom(bindable);
-            bindable.Completed -= OnEntryCompleted;
-        }
-
-        private void OnEntryCompleted(object sender, EventArgs e)
-        {
-            if (Command != null && Command.CanExecute(null))
+            if (string.IsNullOrEmpty(e.NewTextValue) && !double.TryParse(e.NewTextValue, out _))
             {
-                Command.Execute(null);
+                ((Entry)sender).TextColor = Color.FromRgb(255, 255, 255);
             }
         }
     }
