@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,10 +24,23 @@ namespace DancellApp.Controls
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.NewTextValue) && !double.TryParse(e.NewTextValue, out _))
+            if (!string.IsNullOrEmpty(((Entry)sender).Text))
             {
-                ((Entry)sender).TextColor = Color.FromRgb(255, 255, 255);
-            }
+                if (((Entry)sender).Text != "$")
+                {
+                    var value = string.IsNullOrEmpty(((Entry)sender).Text) ? 0 : ((Entry)sender).Text.Contains('$') ?
+                        Convert.ToDecimal(((Entry)sender).Text.Replace("$", "").Replace(",", "")) : Convert.ToDecimal(((Entry)sender).Text);
+                    if (value != 0)
+                    {
+                        ((Entry)sender).Text = value.ToString("C0", CultureInfo.CurrentCulture);
+                        ((Entry)sender).CursorPosition = ((Entry)sender).Text.Length + 1;
+                    }
+                }
+                else
+                {
+                    ((Entry)sender).Text = string.Empty;
+                }               
+            }           
         }
     }
 }

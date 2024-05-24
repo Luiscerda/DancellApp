@@ -28,8 +28,6 @@ namespace DancellApp.ViewModels
             IsVisible = false;
             IsVisibleType = false;
             GetComitionByIdPosCommand = new Command(() => GetComitionByIdPos());
-            MyEntry.Completed += EntryCompleted;
-            //EntryCompletedCommand = new Command(OnEntryCompleted);
         } 
         #endregion
 
@@ -42,7 +40,7 @@ namespace DancellApp.ViewModels
         private bool isVisible;
         private bool isVisibleType;
         private string efectivo;
-        private int cursorPosition;
+        private decimal simcard;
         #endregion
 
         #region Properties
@@ -83,57 +81,26 @@ namespace DancellApp.ViewModels
             set => SetValue(ref isRunning, value);
 
         }
-        public int CursorPosition
-        {
-            get => cursorPosition;
-            set
-            {
-                if (cursorPosition != value)
-                {
-                    cursorPosition = value;
-                    cursorPosition = Efectivo.Length;
-                    OnPropertyChanged(nameof(CursorPosition));
-                }
-            }
-
-        }
         public string Efectivo
         {
             get => efectivo;
             set
             {
-                if (efectivo != value)
-                {
-                    if (!string.IsNullOrEmpty(value) && efectivo != value)
-                    {
-                        if (value.Length > 3)
-                        {
-                            value = value.Contains('$') ? value.Replace("$", "").Replace(",", "") : value;
-                            if (value != "")
-                            {
-                                efectivo = Convert.ToDecimal(value).ToString("C0", CultureInfo.CurrentCulture);
-                                
-                            }
-                            else
-                            {
-                                efectivo = "";
-                            }
-                        }
-                        else
-                        {
-                            efectivo = value;
-                        }
-
-                        OnPropertyChanged();
-                    }
-                }
+                efectivo = value.ToString().Contains('$') ? value.ToString().Replace("$", "").Replace(",", "") : value;
+                CalcRestante();
+                OnPropertyChanged();
                 
-                
-                
-               
             }
         }
-        public Entry MyEntry { get; } = new Entry();
+        public decimal SimCard
+        {
+            get => simcard;
+            set
+            {
+                SetValue(ref simcard, value);
+                CalcRestante();
+            }
+        }
         public ICommand SelectComitionCommand => new Command<ComitionModel>(ViewTypeComitions);
         #endregion
 
@@ -203,18 +170,18 @@ namespace DancellApp.ViewModels
         {
             IsVisible = false;
             IsVisibleType = true;
-            ValorRestante = comition.Valor;
+            ValorRestante = comition.ValorComision.ToString();
         }
 
         public string ConvertMoney(decimal value)
         {
             return value.ToString("C0", CultureInfo.CurrentCulture);
         }
-        private void EntryCompleted(object sender, EventArgs e)
+
+        public void CalcRestante()
         {
-            // Acciones a realizar cuando se completa la entrada
-            var enteredText = MyEntry.Text;
-            // Por ejemplo, procesar el texto ingresado
+            var resta = Convert.ToDecimal(ValorRestante) - Convert.ToDecimal(Efectivo);
+            ValorRestante = resta.ToString();
         }
         #endregion
     }

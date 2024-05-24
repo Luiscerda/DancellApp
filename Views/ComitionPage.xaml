@@ -193,8 +193,7 @@
                             HorizontalTextAlignment="Center"
                             PlaceholderColor="#647B9D"
                             TextColor="#74787E"
-                            Text="{Binding MyEntry.Text}"
-
+                            Text="{Binding Efectivo, Mode=TwoWay}"
                         >
                             <controls:CustomEntry.Behaviors>
                                 <local:EntryCompletedBehavior/>
@@ -218,7 +217,12 @@
                             HorizontalTextAlignment="Center"
                             PlaceholderColor="#647B9D"
                             TextColor="#74787E"
-                        />
+                            Text="{Binding SimCard, Mode=TwoWay}"
+                        >
+                            <controls:CustomEntry.Behaviors>
+                                <local:EntryCompletedBehavior/>
+                            </controls:CustomEntry.Behaviors>
+                        </controls:CustomEntry>
                     </StackLayout>
                     <StackLayout HorizontalOptions="Start" Margin="0,30">
                         <Label
